@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Team } from 'src/app/common/team';
+import { Team } from 'src/app/model/team.model';
 import { TeamService } from 'src/app/services/team.service';
 
 @Component({
@@ -8,20 +8,14 @@ import { TeamService } from 'src/app/services/team.service';
   styleUrls: ['./team-list.component.css']
 })
 export class TeamListComponent implements OnInit {
-
   teams: Team[] = [];
+  
   constructor(private teamService: TeamService) { }
 
-  ngOnInit(): void {
-    this.listTeams();
-  }
-
-  listTeams() {
-    this.teamService.getTeamList().subscribe(
-      data => {
-        this.teams = data;
+  ngOnInit() {
+    this.teamService.getTeamList().subscribe(response => {
+        this.teams = response;
       }
     )
   }
-
 }
