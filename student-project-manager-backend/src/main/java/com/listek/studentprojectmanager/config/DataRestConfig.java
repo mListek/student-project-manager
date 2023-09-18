@@ -1,5 +1,6 @@
 package com.listek.studentprojectmanager.config;
 
+import com.listek.studentprojectmanager.entity.Message;
 import com.listek.studentprojectmanager.entity.Task;
 import com.listek.studentprojectmanager.entity.Team;
 import com.listek.studentprojectmanager.entity.User;
@@ -33,5 +34,11 @@ public class DataRestConfig implements RepositoryRestConfigurer {
         .forDomainType(Task.class)
         .withItemExposure((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions))
         .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions));
+
+    // disable HTTP methods for Message: PUT, POST, DELETE
+    config.getExposureConfiguration()
+            .forDomainType(Message.class)
+            .withItemExposure((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions))
+            .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions));
   }
 }
