@@ -22,8 +22,15 @@ public class Team {
   private String code;
 
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
-  private Set<User> users;
+  private Set<Message> messages;
 
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
   private Set<Task> tasks;
+
+  @ManyToMany
+  @JoinTable(
+    name = "user_team",
+    joinColumns = @JoinColumn(name = "user_id"),
+    inverseJoinColumns = @JoinColumn(name = "team_id"))
+  private Set<User> users;
 }

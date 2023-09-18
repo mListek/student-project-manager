@@ -3,6 +3,8 @@ package com.listek.studentprojectmanager.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "task")
 @Data
@@ -22,4 +24,11 @@ public class Task {
 
   @Column(name = "status")
   private String status;
+
+  @ManyToMany
+  @JoinTable(
+          name = "user_task",
+          joinColumns = @JoinColumn(name = "user_id"),
+          inverseJoinColumns = @JoinColumn(name = "task_id"))
+  private Set<User> users;
 }
