@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Team } from '../common/team';
 import { map } from 'rxjs/operators';
+import { Team } from '../model/team.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,16 +11,16 @@ export class TeamService {
 
   private baseUrl = 'http://localhost:8080/api/teams';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   getTeamList(): Observable<Team[]> {
-    return this.httpClient.get<GetResponse>(this.baseUrl).pipe(
+    return this.http.get<TeamResponseData>(this.baseUrl).pipe(
       map(response => response._embedded.teams)
     );
   }
 }
 
-interface GetResponse {
+interface TeamResponseData {
   _embedded: {
     teams: Team[];
   }
