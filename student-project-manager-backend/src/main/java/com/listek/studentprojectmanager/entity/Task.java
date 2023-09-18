@@ -1,9 +1,11 @@
 package com.listek.studentprojectmanager.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
 @Table(name = "task")
+@Data
 public class Task {
 
   @Id
@@ -20,32 +22,4 @@ public class Task {
 
   @Column(name = "status")
   private String status;
-
-  public Long getId() {
-    return id;
-  }
-
-  public Team getTeam() {
-    return team;
-  }
-
-  public void setTeam(Team team) {
-    this.team = team;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public String getStatus() {
-    return status;
-  }
-
-  public void setStatus(String status) {
-    this.status = status;
-  }
 }
