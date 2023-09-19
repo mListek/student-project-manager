@@ -33,6 +33,7 @@
 
 .form-control {
   border-radius: 25px;
+  padding: 0 10px;
   height: 35px;
   width: 100%;
   margin-bottom: 25px;
