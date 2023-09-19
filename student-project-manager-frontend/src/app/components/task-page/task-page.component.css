@@ -1,0 +1,79 @@
+.header {
+  height: 194px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-text {
+  font-size: 64px;
+}
+
+.main-content {
+  width: 75%;
+  margin:auto;
+}
+
+.task-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 10px 50px;
+  margin-bottom: 50px;
+}
+
+.form-label {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.form-control {
+  border-radius: 25px;
+  padding: 0 10px;
+  margin: 0 50px;
+  height: 35px;
+  width: 50%;
+}
+
+.submit-button {
+  height: 35px;
+  width: 150px;
+  font-weight: 700;
+  color: #fff;
+  background-color: #1762A7;
+  border-radius: 10px;
+}
+
+.kanban {
+  background-color: #1e1f25;
+  border-radius: 25px;
+  padding: 25px 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.kanban__column {
+  margin: 0 25px;
+}
+
+.column__header {
+  font-size: 48px;
+}
+
+.column__line {
+  border: 1px solid #1762A7;
+}
+
+.column__task {
+  height: 70px;
+  background-color: #1762A7;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px 0;
+}
+
+.kanban__line {
+  border-left: 1px solid #1762a7;
+}
