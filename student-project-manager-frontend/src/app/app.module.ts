@@ -7,13 +7,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { MessageListComponent } from './components/message-list/message-list.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
+import { LoginPageComponent } from './components/login-page/login-page.component';
+import { RegisterPageComponent } from './components/register-page/register-page.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { TaskPageComponent } from './components/task-page/task-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TeamListComponent,
     TaskListComponent,
-    MessageListComponent
+    MessageListComponent,
+    LoginPageComponent,
+    RegisterPageComponent,
+    NavbarComponent,
+    TaskPageComponent
   ],
   imports: [
     BrowserModule,
