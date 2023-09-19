@@ -41,6 +41,7 @@
 
 .submit-button {
   width: 100%;
+  font-weight: 700;
   height: 35px;
   color: #fff;
   background-color: #1762A7;
@@ -50,4 +51,5 @@
 
 .redirect-link {
   color: #fff;
+  margin: auto;
 }
