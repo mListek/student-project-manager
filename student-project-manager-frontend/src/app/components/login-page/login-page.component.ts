@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login-page',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class LoginPageComponent {
 
+  onLogin(form: NgForm) {
+    const value = form.value;
+    console.log(value.email + ' - ' + value.password);
+    console.log(form);
+  }
 }
