@@ -17,6 +17,7 @@ import { FilePageComponent } from './components/file-page/file-page.component';
 import { SettingPageComponent } from './components/setting-page/setting-page.component';
 import { GroupPageComponent } from './components/group-page/group-page.component';
 import { GroupDetailsPageComponent } from './components/group-details-page/group-details-page.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { GroupDetailsPageComponent } from './components/group-details-page/group
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
