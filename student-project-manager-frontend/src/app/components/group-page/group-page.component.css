@@ -1,0 +1,114 @@
+/* width */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 15%);
+  border-radius: 25px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #1762A7;
+  border-radius: 25px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(23, 98, 167, 50%);
+}
+
+.header {
+  height: 194px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-text {
+  font-size: 64px;
+}
+
+.main-content {
+  width: 75%;
+  margin:auto;
+  background-color: #1e1f25;
+  border-radius: 25px;
+  padding: 25px;
+}
+
+.groups__list {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 500px;
+  overflow-y: scroll;
+}
+
+.group-header__container, .group-container {
+  width: 75%;
+  margin: 5px 25px;
+  border-radius: 25px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.group-container {
+  background-color: rgba(217, 217, 217, 15%);
+}
+
+.group__text, .border__line--vertical, .delete-button {
+  min-width: 20%;
+}
+
+.border__line--vertical {
+  border-left: 1px solid #1762a7;
+  height: 60%;
+}
+
+.delete-button {
+  height: 25px;
+  width: 150px;
+  font-weight: 700;
+  color: #fff;
+  background-color: rgba(255, 0, 0, 50%);
+  border-radius: 5px;
+}
+
+.border-line {
+  border: 1px solid rgba(23, 98, 167, 50%);
+  margin: 25px 0;
+}
+
+.group-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 10px 50px;
+}
+
+.form-label {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.form-control {
+  border-radius: 25px;
+  padding: 0 10px;
+  margin: 0 50px;
+  height: 35px;
+  width: 50%;
+}
+
+.submit-button {
+  height: 35px;
+  width: 150px;
+  font-weight: 700;
+  color: #fff;
+  background-color: #1762A7;
+  border-radius: 10px;
+}
