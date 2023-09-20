@@ -3,40 +3,40 @@
     <h1 class="header-text">Stwórz konto, aby dołączyć</h1>
   </div>
   <div class="main-content">
-    <form class="login-form">
+    <form class="login-form" (ngSubmit)="onRegister(f)" #f="ngForm">
       <h3 class="form-header">Dane osobowe:</h3>
       <hr class="form-line">
       <div class="form-group">
         <label for="firstname" class="form-label">Imię:</label>
-        <input type="text" id="firstname" class="form-control" />
+        <input type="text" id="firstname" name="firstname" ngModel required class="form-control" />
         <label for="lastname" class="form-label">Nazwisko:</label>
-        <input type="text" id="lastname" class="form-control" />
+        <input type="text" id="lastname" name="lastname" ngModel required class="form-control" />
       </div>
       <h3 class="form-header">Dane logowania:</h3>
       <hr class="form-line">
       <div class="form-group">
         <label for="email" class="form-label">Email:</label>
-        <input type="email" id="email" class="form-control" />
+        <input type="email" id="email" name="email" ngModel required email class="form-control" />
         <label for="repeat-email" class="form-label">Powtórz email:</label>
-        <input type="email" id="repeat-email" class="form-control" />
+        <input type="email" id="repeat-email" name="repeat-email" ngModel required class="form-control" />
       </div>
       <div class="form-group">
         <label for="password" class="form-label">Hasło:</label>
-        <input type="password" id="password" class="form-control" />
+        <input type="password" id="password" name="password" ngModel required class="form-control" />
         <label for="repeat-password" class="form-label">Powtórz hasło:</label>
-        <input type="password" id="repeat-password" class="form-control" />
+        <input type="password" id="repeat-password" name="repeat-password" ngModel required class="form-control" />
       </div>
       <h3 class="form-header">Grupa:</h3>
       <hr class="form-line">
       <div class="form-group">
         <label for="group-code" class="form-label">Kod grupy:</label>
-        <input type="text" id="group-code" class="form-control" />
-        <input type="checkbox" id="teacher" class="form-checkbox" />
+        <input type="text" id="group-code" name="group-code" ngModel class="form-control" />
+        <input type="checkbox" id="teacher" value=true name="teacher" ngModel class="form-checkbox" />
         <label for="teacher" class="form-label">Konto wykładowcy</label>
       </div>
       <hr class="form-line__bottom">
-      <button class="submit-button" type="submit">Zarejestruj się</button>
-      <a href="#" class="redirect-link">Masz już konto? Zaloguj się...</a>
+      <button class="submit-button" type="submit" [disabled]="!f.valid">Zarejestruj się</button>
+      <a routerLink="/login" class="redirect-link">Masz już konto? Zaloguj się...</a>
     </form>
   </div>
 </div>
