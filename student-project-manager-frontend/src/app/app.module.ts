@@ -14,6 +14,7 @@ import { TaskPageComponent } from './components/task-page/task-page.component';
 import { MessagePageComponent } from './components/message-page/message-page.component';
 import { TaskDetailsPageComponent } from './components/task-details-page/task-details-page.component';
 import { FilePageComponent } from './components/file-page/file-page.component';
+import { SettingPageComponent } from './components/setting-page/setting-page.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { FilePageComponent } from './components/file-page/file-page.component';
     TaskPageComponent,
     MessagePageComponent,
     TaskDetailsPageComponent,
-    FilePageComponent
+    FilePageComponent,
+    SettingPageComponent
   ],
   imports: [
     BrowserModule,
