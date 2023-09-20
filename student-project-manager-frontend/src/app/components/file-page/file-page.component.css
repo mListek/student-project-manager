@@ -1,0 +1,125 @@
+/* width */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 15%);
+  border-radius: 25px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #1762A7;
+  border-radius: 25px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(23, 98, 167, 50%);
+}
+
+.header {
+  height: 194px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-text {
+  font-size: 64px;
+}
+
+.main-content {
+  width: 75%;
+  margin:auto;
+  background-color: #1e1f25;
+  border-radius: 25px;
+  padding: 25px;
+}
+
+.files__list {
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  overflow-y: scroll;
+}
+
+.file-container {
+  width: 90%;
+  margin: 5px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.file__info {
+  height: 100%;
+  min-height: 50px;
+  width: 75%;
+  background-color: rgba(217, 217, 217, 15%);
+  border-radius: 25px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+}
+
+.file__icon {
+  height: 70%;
+  max-height: 50px;
+  margin-right: 10px;
+}
+
+.file__name {
+  max-width: 90%;
+  word-wrap: break-word;
+}
+
+.delete-button {
+  height: 25px;
+  width: 150px;
+  font-weight: 700;
+  color: #fff;
+  background-color: rgba(255, 0, 0, 50%);
+  border-radius: 5px;
+  margin: 0 60px;
+}
+
+.border-line {
+  border: 1px solid rgba(23, 98, 167, 50%);
+  margin: 25px 0;
+}
+
+.file-form {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 50px;
+}
+
+.form__header {
+  font-size: 20px;
+  font-weight: 700;
+  margin-right: 30px;
+}
+
+.upload-button {
+  height: 25px;
+  width: 125px;
+  font-weight: 700;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 15%);
+  border-radius: 5px;
+  margin-right: 30px;
+}
+
+.submit-button {
+  height: 35px;
+  width: 150px;
+  font-weight: 700;
+  color: #fff;
+  background-color: #1762A7;
+  border-radius: 10px;
+  margin-left: auto;
+}

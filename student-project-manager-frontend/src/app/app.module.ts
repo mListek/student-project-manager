@@ -13,6 +13,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { TaskPageComponent } from './components/task-page/task-page.component';
 import { MessagePageComponent } from './components/message-page/message-page.component';
 import { TaskDetailsPageComponent } from './components/task-details-page/task-details-page.component';
+import { FilePageComponent } from './components/file-page/file-page.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { TaskDetailsPageComponent } from './components/task-details-page/task-de
     NavbarComponent,
     TaskPageComponent,
     MessagePageComponent,
-    TaskDetailsPageComponent
+    TaskDetailsPageComponent,
+    FilePageComponent
   ],
   imports: [
     BrowserModule,

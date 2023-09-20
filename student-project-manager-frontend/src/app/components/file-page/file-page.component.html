@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="header">
+    <h1 class="header-text">Pliki</h1>
+  </div>
+  <div class="main-content">
+    <div class="files__list">
+      <div class="file-container">
+        <div class="file__info">
+          <img src="assets/icons/file.svg" alt="file-icon" class="file__icon" />
+          <p class="file__name">opracowanie_tematu_prezentacji_michal_listek.pdf</p>
+        </div>
+        <button class="delete-button" type="button">Usuń</button>
+      </div>
+      <div class="file-container">
+        <div class="file__info">
+          <img src="assets/icons/file.svg" alt="file-icon" class="file__icon" />
+          <p class="file__name">opracowanie_tematu_prezentacji_michal_listek.pdf</p>
+        </div>
+        <button class="delete-button" type="button">Usuń</button>
+      </div>
+      <div class="file-container">
+        <div class="file__info">
+          <img src="assets/icons/file.svg" alt="file-icon" class="file__icon" />
+          <p class="file__name">opracowanie_tematu_prezentacji_michal_listek.pdf</p>
+        </div>
+        <button class="delete-button" type="button">Usuń</button>
+      </div>
+      <div class="file-container">
+        <div class="file__info">
+          <img src="assets/icons/file.svg" alt="file-icon" class="file__icon" />
+          <p class="file__name">opracowanie_tematu_prezentacji_michal_listek.pdf</p>
+        </div>
+        <button class="delete-button" type="button">Usuń</button>
+      </div>
+    </div>
+    <div class="border-line"></div>
+    <form class="file-form">
+      <input type="file" class="file-input" hidden />
+      <h3 class="form__header">Dodaj plik:</h3>
+      <button class="upload-button" type="button">Wybierz plik</button>
+      <p class="file__name">{{ filename || "Nie wybrano pliku" }}</p>
+      <button class="submit-button" type="submit">Wyślij</button>
+    </form>
+  </div>
+</div>
