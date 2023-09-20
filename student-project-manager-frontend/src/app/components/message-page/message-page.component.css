@@ -1,0 +1,125 @@
+/* width */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 15%);
+  border-radius: 25px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #1762A7;
+  border-radius: 25px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(23, 98, 167, 50%);
+}
+
+.header {
+  height: 194px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-text {
+  font-size: 64px;
+}
+
+.main-content {
+  width: 75%;
+  margin:auto;
+  background-color: #1e1f25;
+  border-radius: 25px;
+  padding: 25px;
+}
+
+.messages__list {
+  display: flex;
+  flex-direction: column-reverse;
+  height: 500px;
+  overflow-y: scroll;
+}
+
+.message-container {
+  width: 45%;
+  position: relative;
+  margin: 5px 25px;
+}
+
+/* Temporary */
+.message-container:nth-child(odd) {
+  margin-left: auto;
+}
+
+/* Temporary */
+.message-container:nth-child(odd) > .message__content {
+  background-color: rgba(23, 98, 167, 50%);
+}
+
+.message__info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.message__content {
+  height: 75px;
+  background-color: rgba(25, 190, 51, 50%);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.message__content::after {
+  content: '';
+  position: absolute;
+  left: -17px;
+  bottom: -14px;
+  width: 0;
+  height: 0;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  /* border-left: 15px solid #1b4166; tip color blue */
+  /* border-left: 15px solid #1c6f2c; tip color green */
+  transform: rotate(45deg);
+}
+
+.border-line {
+  border: 1px solid rgba(23, 98, 167, 50%);
+  margin: 25px 0;
+}
+
+.message-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 10px 50px;
+}
+
+.form-label {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.form-control {
+  border-radius: 25px;
+  padding: 0 10px;
+  margin: 0 50px;
+  height: 35px;
+  width: 50%;
+}
+
+.submit-button {
+  height: 35px;
+  width: 150px;
+  font-weight: 700;
+  color: #fff;
+  background-color: #1762A7;
+  border-radius: 10px;
+}
