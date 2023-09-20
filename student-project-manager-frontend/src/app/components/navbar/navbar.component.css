@@ -12,6 +12,7 @@
 
 .navbar__link {
   height: 75%;
+  text-decoration: none;
 }
 
 .navbar__link--active {
@@ -32,7 +33,6 @@
 
 .link__text {
   color: #fff;
-  text-decoration: none;
   margin: 0 5px;
 }
 
