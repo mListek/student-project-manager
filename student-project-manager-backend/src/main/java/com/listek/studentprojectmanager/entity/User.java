@@ -30,9 +30,6 @@ public class User {
   @Column(name = "password")
   private String password;
 
-  @Column(name = "salt")
-  private String salt;
-
   @ManyToMany(mappedBy = "users")
   private Set<Team> teams;
 
