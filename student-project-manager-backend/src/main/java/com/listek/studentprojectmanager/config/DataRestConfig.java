@@ -15,7 +15,7 @@ public class DataRestConfig implements RepositoryRestConfigurer {
   @Override
   public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
 
-    HttpMethod[] theUnsupportedActions = {HttpMethod.PUT, HttpMethod.POST, HttpMethod.DELETE};
+    HttpMethod[] theUnsupportedActions = {};
 
     // disable HTTP methods for Team: PUT, POST, DELETE
     config.getExposureConfiguration()
