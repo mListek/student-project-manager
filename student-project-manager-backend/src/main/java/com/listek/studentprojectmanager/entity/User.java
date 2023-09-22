@@ -24,8 +24,8 @@ public class User {
   @Column(name = "lastname")
   private String lastname;
 
-  @Column(name = "isteacher")
-  private boolean isTeacher;
+  @Column(name = "role")
+  private String role;
 
   @Column(name = "password")
   private String password;
