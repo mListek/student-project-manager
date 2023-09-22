@@ -20,6 +20,7 @@
         name="password"
         ngModel
         required
+        minlength="6"
         class="form-control" />
       <button class="submit-button" type="submit" [disabled]="!f.valid">Zaloguj się</button>
       <a routerLink="/register" class="redirect-link">Nie masz konta? Zarejestruj się...</a>
