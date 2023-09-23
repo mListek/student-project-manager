@@ -21,6 +21,7 @@ export class RegisterPageComponent {
     const role = form.value.teacher ? 'teacher' : 'student';
 
     const user: User = new User(
+      -1,
       form.value.email,
       form.value.firstname,
       form.value.lastname,
@@ -30,6 +31,7 @@ export class RegisterPageComponent {
     
     this.authService.signup(user).subscribe(
       resData => {
+        console.log('Register page component data...');
         console.log(resData);
         this.router.navigate(['/tasks']);
       },

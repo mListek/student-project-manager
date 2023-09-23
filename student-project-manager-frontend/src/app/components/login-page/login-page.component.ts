@@ -20,6 +20,7 @@ export class LoginPageComponent {
 
     this.authService.login(form.value.email, form.value.password).subscribe(
       resData => {
+        console.log('Login page component data...');
         console.log(resData);
         this.router.navigate(['/tasks']);
       },
