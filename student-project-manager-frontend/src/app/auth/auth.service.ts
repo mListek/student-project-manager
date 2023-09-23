@@ -3,12 +3,14 @@ import { Injectable } from "@angular/core";
 import { User } from "../model/user.model";
 import { catchError, tap } from "rxjs/operators";
 import { BehaviorSubject, throwError } from "rxjs";
+import { Router } from "@angular/router";
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   user = new BehaviorSubject<User>(null);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+              private router: Router) {}
 
   signup(user: User) {
     return this.http.post<User>(
@@ -33,10 +35,42 @@ export class AuthService {
     }));
   }
 
+  autoLogin() {
+    const userData: {
+      id: number;
+      email: string;
+      firstname: string;
+      lastname: string;
+      password: string;
+      role: string;
+    } = JSON.parse(localStorage.getItem('userData'));
+    if (!userData) {
+      return;
+    }
+
+    const loadedUser = new User(
+      userData.id,
+      userData.email,
+      userData.firstname,
+      userData.lastname,
+      userData.password,
+      userData.role
+    );
+
+    this.user.next(loadedUser);
+  }
+
+  logout() {
+    this.user.next(null);
+    localStorage.removeItem('userData');
+    this.router.navigate(['/login']);
+  }
+
   private handleAuthentication(
     id: number, email: string, firstname: string, lastname: string, password: string, role: string) {
       const user = new User(id, email, firstname, lastname, password, role);
       this.user.next(user);
+      localStorage.setItem('userData', JSON.stringify(user));
   }
 
   private handleError(errorRes: HttpErrorResponse) {
