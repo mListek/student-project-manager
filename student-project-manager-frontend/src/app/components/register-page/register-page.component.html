@@ -34,6 +34,9 @@
         <input type="checkbox" id="teacher" value=true name="teacher" ngModel class="form-checkbox" />
         <label for="teacher" class="form-label">Konto wykładowcy</label>
       </div>
+      <div class="form-error" *ngIf="error">
+        <p>{{ error }}</p>
+      </div>
       <hr class="form-line__bottom">
       <button class="submit-button" type="submit" [disabled]="!f.valid">Zarejestruj się</button>
       <a routerLink="/login" class="redirect-link">Masz już konto? Zaloguj się...</a>
