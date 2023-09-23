@@ -9,18 +9,21 @@ import { FilePageComponent } from "./components/file-page/file-page.component";
 import { SettingPageComponent } from "./components/setting-page/setting-page.component";
 import { GroupPageComponent } from "./components/group-page/group-page.component";
 import { GroupDetailsPageComponent } from "./components/group-details-page/group-details-page.component";
+import { GuestGuard } from "./auth/guest.guard";
+import { UserGuard } from "./auth/user.guard";
+import { TeacherGuard } from "./auth/teacher.guard";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginPageComponent },
-  { path: 'register', component: RegisterPageComponent },
-  { path: 'tasks', component: TaskPageComponent },
-  { path: 'tasks/:id', component: TaskDetailsPageComponent },
-  { path: 'messages', component: MessagePageComponent },
-  { path: 'files', component: FilePageComponent },
-  { path: 'settings', component: SettingPageComponent },
-  { path: 'groups', component: GroupPageComponent },
-  { path: 'groups/:id', component: GroupDetailsPageComponent }
+  { path: 'login', component: LoginPageComponent, canActivate: [UserGuard] },
+  { path: 'register', component: RegisterPageComponent, canActivate: [UserGuard] },
+  { path: 'tasks', component: TaskPageComponent, canActivate: [GuestGuard] },
+  { path: 'tasks/:id', component: TaskDetailsPageComponent, canActivate: [GuestGuard] },
+  { path: 'messages', component: MessagePageComponent, canActivate: [GuestGuard] },
+  { path: 'files', component: FilePageComponent, canActivate: [GuestGuard] },
+  { path: 'settings', component: SettingPageComponent, canActivate: [GuestGuard] },
+  { path: 'groups', component: GroupPageComponent, canActivate: [GuestGuard, TeacherGuard] },
+  { path: 'groups/:id', component: GroupDetailsPageComponent, canActivate: [GuestGuard] }
 ];
 
 @NgModule({
