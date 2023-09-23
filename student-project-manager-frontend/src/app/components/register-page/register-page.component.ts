@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { User } from 'src/app/model/user.model';
 
@@ -9,7 +10,10 @@ import { User } from 'src/app/model/user.model';
   styleUrls: ['./register-page.component.css']
 })
 export class RegisterPageComponent {
-  constructor(private authService: AuthService) {}
+  error: string = '';
+
+  constructor(private authService: AuthService,
+              private router: Router) {}
 
   onRegister(form: NgForm) {
     if (!form.valid) return;
@@ -23,15 +27,14 @@ export class RegisterPageComponent {
       form.value.password,
       role
     );
-
-    console.log(user);
     
     this.authService.signup(user).subscribe(
       resData => {
         console.log(resData);
+        this.router.navigate(['/tasks']);
       },
       error => {
-        console.log(error);
+        this.error = error;
       }
     );
     form.reset();
