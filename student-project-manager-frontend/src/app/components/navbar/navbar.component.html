@@ -24,8 +24,9 @@
       <img src="assets\icons\settings.svg" alt="icon" class="link__icon" />
       <p class="link__text">Ustawienia</p>
     </a>
-    <div class="border__line"></div>
-    <a routerLink="/groups" routerLinkActive="navbar__link--active" class="navbar__link">
+    <div class="border__line" *ngIf="user.role === 'teacher'"></div>
+    <a routerLink="/groups" routerLinkActive="navbar__link--active" class="navbar__link"
+      *ngIf="user.role==='teacher'">
       <img src="assets\icons\list.svg" alt="icon" class="link__icon" />
       <p class="link__text">Lista Grup</p>
     </a>
