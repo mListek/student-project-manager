@@ -2,11 +2,11 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { User } from "../model/user.model";
 import { catchError, tap } from "rxjs/operators";
-import { Subject, throwError } from "rxjs";
+import { BehaviorSubject, throwError } from "rxjs";
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  user = new Subject<User>();
+  user = new BehaviorSubject<User>(null);
 
   constructor(private http: HttpClient) {}
 
@@ -15,7 +15,7 @@ export class AuthService {
       'http://localhost:8080/api/register', 
       user
     ).pipe(catchError(this.handleError), tap(res => {
-      this.handleAuthentication(res.email, res.firstname, res.lastname, res.password, res.role);
+      this.handleAuthentication(+res.id, res.email, res.firstname, res.lastname, res.password, res.role);
     }));
   }
 
@@ -27,13 +27,15 @@ export class AuthService {
         password: password
       }
     ).pipe(catchError(this.handleError), tap(res => {
-      this.handleAuthentication(res.email, res.firstname, res.lastname, res.password, res.role);
+      console.log('auth service res:')
+      console.log(res);
+      this.handleAuthentication(+res.id, res.email, res.firstname, res.lastname, res.password, res.role);
     }));
   }
 
   private handleAuthentication(
-    email: string, firstname: string, lastname: string, password: string, role: string) {
-      const user = new User(email, firstname, lastname, password, role);
+    id: number, email: string, firstname: string, lastname: string, password: string, role: string) {
+      const user = new User(id, email, firstname, lastname, password, role);
       this.user.next(user);
   }
 
