@@ -30,7 +30,7 @@ export class TeamService implements OnInit{
 
   getUserTeams() {
     return this.http.get<TeamResponseData>(`${this.baseUrl}users/${this.user.id}/teams`).pipe(
-      map(response => response._embedded.teams);
+      map(response => response._embedded.teams)
     );
   }
 }
