@@ -1,21 +1,36 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { Team } from '../model/team.model';
+import { User } from '../model/user.model';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TeamService {
+export class TeamService implements OnInit{
+  user: User = null;
+  private baseUrl = 'http://localhost:8080/api/';
 
-  private baseUrl = 'http://localhost:8080/api/teams';
+  constructor(private authService: AuthService,
+              private http: HttpClient) { }
 
-  constructor(private http: HttpClient) { }
+  ngOnInit() {
+    this.authService.user.pipe(take(1)).subscribe(user => {
+      this.user = user;
+    });
+  }
 
   getTeamList(): Observable<Team[]> {
-    return this.http.get<TeamResponseData>(this.baseUrl).pipe(
+    return this.http.get<TeamResponseData>(`${this.baseUrl}teams`).pipe(
       map(response => response._embedded.teams)
+    );
+  }
+
+  getUserTeams() {
+    return this.http.get<TeamResponseData>(`${this.baseUrl}users/${this.user.id}/teams`).pipe(
+      map(response => response._embedded.teams);
     );
   }
 }
