@@ -4,40 +4,63 @@
       <img src="assets\icons\logo.svg" alt="logo" class="link__icon" />
       <p class="link__text--bold">Project MGR</p>
     </a>
-    <div class="border__line"></div>
-    <a routerLink="/tasks" routerLinkActive="navbar__link--active" class="navbar__link">
+    <div class="border__line"  *ngIf="isLoggedIn"></div>
+    <a
+      routerLink="/tasks"
+      routerLinkActive="navbar__link--active"
+      class="navbar__link"
+      *ngIf="isLoggedIn">
       <img src="assets\icons\task.svg" alt="icon" class="link__icon" />
       <p class="link__text">Zadania</p>
     </a>
-    <div class="border__line"></div>
-    <a routerLink="/messages" routerLinkActive="navbar__link--active" class="navbar__link">
+    <div class="border__line"  *ngIf="isLoggedIn"></div>
+    <a
+      routerLink="/messages"
+      routerLinkActive="navbar__link--active"
+      class="navbar__link"
+      *ngIf="isLoggedIn">
       <img src="assets\icons\message.svg" alt="icon" class="link__icon" />
       <p class="link__text">Wiadomości</p>
     </a>
-    <div class="border__line"></div>
-    <a routerLink="/files" routerLinkActive="navbar__link--active" class="navbar__link">
+    <div class="border__line"  *ngIf="isLoggedIn"></div>
+    <a
+      routerLink="/files"
+      routerLinkActive="navbar__link--active"
+      class="navbar__link"
+      *ngIf="isLoggedIn">
       <img src="assets\icons\file.svg" alt="icon" class="link__icon" />
       <p class="link__text">Pliki</p>
     </a>
-    <div class="border__line"></div>
-    <a routerLink="/settings" routerLinkActive="navbar__link--active" class="navbar__link">
+    <div class="border__line"  *ngIf="isLoggedIn"></div>
+    <a
+      routerLink="/settings"
+      routerLinkActive="navbar__link--active"
+      class="navbar__link"
+      *ngIf="isLoggedIn">
       <img src="assets\icons\settings.svg" alt="icon" class="link__icon" />
       <p class="link__text">Ustawienia</p>
     </a>
-    <div class="border__line" *ngIf="user.role === 'teacher'"></div>
-    <a routerLink="/groups" routerLinkActive="navbar__link--active" class="navbar__link"
-      *ngIf="user.role==='teacher'">
+    <div class="border__line" *ngIf="isTeacher"></div>
+    <a
+      routerLink="/groups"
+      routerLinkActive="navbar__link--active"
+      class="navbar__link"
+      *ngIf="isTeacher">
       <img src="assets\icons\list.svg" alt="icon" class="link__icon" />
       <p class="link__text">Lista Grup</p>
     </a>
   </div>
   <div class="navbar-right">
-    <a routerLink="/groups" routerLinkActive="navbar__link--active" class="navbar__link">
+    <a
+      routerLink="/groups"
+      routerLinkActive="navbar__link--active"
+      class="navbar__link"
+      *ngIf="isLoggedIn">
       <p class="link__text">Grupa: 2K331/BD</p>
       <img src="assets\icons\group.svg" alt="icon" class="link__icon" />
     </a>
-    <div class="border__line"></div>
-    <a routerLink="/login" class="navbar__link">
+    <div class="border__line"  *ngIf="isLoggedIn"></div>
+    <a (click)="onLogout()" class="navbar__link"  *ngIf="isLoggedIn">
       <p class="link__text">Wyloguj się</p>
       <img src="assets\icons\logout.svg" alt="icon" class="link__icon" />
     </a>

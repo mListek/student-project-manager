@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription, take } from 'rxjs';
+import { take } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { User } from 'src/app/model/user.model';
 
@@ -10,12 +10,26 @@ import { User } from 'src/app/model/user.model';
 })
 export class NavbarComponent implements OnInit {
   user!: User;
+  isLoggedIn = false;
+  isTeacher = false;
 
   constructor(private authService: AuthService) {}
   
   ngOnInit() {
-    this.authService.user.pipe(take(1)).subscribe(user => {
+    this.authService.user.subscribe(user => {
       this.user = user;
+      if (user !== null) {
+        this.isLoggedIn = true;
+        if (user.role === 'teacher') {
+          this.isTeacher = true;
+        }
+      }
     });
+  }
+
+  onLogout() {
+    this.isLoggedIn = false;
+    this.isTeacher = false;
+    this.authService.logout();
   }
 }
