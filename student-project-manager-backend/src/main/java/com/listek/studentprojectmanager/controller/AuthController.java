@@ -33,7 +33,9 @@ public class AuthController {
 
         userService.saveUser(userDto);
 
-        return ResponseEntity.ok().body(userDto);
+        User createdUser = userService.findUserByEmail(userDto.getEmail());
+
+        return ResponseEntity.ok().body(createdUser);
     }
 
     @PostMapping("/login")
