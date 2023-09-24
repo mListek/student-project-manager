@@ -30,7 +30,7 @@ public class Team {
   @ManyToMany
   @JoinTable(
     name = "user_team",
-    joinColumns = @JoinColumn(name = "user_id"),
-    inverseJoinColumns = @JoinColumn(name = "team_id"))
+    joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "team_id", referencedColumnName = "id"))
   private Set<User> users;
 }
