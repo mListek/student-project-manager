@@ -52,11 +52,13 @@
   </div>
   <div class="navbar-right">
     <a
-      routerLink="/groups"
+      *ngIf="currentTeam"
+      [routerLink]="'/groups/' + currentTeam.id"
       routerLinkActive="navbar__link--active"
+      [routerLinkActiveOptions]="{exact: true}"
       class="navbar__link"
-      *ngIf="isLoggedIn">
-      <p class="link__text">Grupa: 2K331/BD</p>
+      >
+      <p class="link__text">Grupa: {{ currentTeam.name }}</p>
       <img src="assets\icons\group.svg" alt="icon" class="link__icon" />
     </a>
     <div class="border__line"  *ngIf="isLoggedIn"></div>

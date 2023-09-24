@@ -26,7 +26,9 @@ export class RegisterPageComponent {
       form.value.firstname,
       form.value.lastname,
       form.value.password,
-      role
+      role,
+      [],
+      []
     );
     
     this.authService.signup(user).subscribe(
