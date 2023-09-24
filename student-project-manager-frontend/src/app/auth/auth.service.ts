@@ -4,6 +4,8 @@ import { User } from "../model/user.model";
 import { catchError, tap } from "rxjs/operators";
 import { BehaviorSubject, throwError } from "rxjs";
 import { Router } from "@angular/router";
+import { Team } from "../model/team.model";
+import { Task } from "../model/task.model";
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -17,7 +19,15 @@ export class AuthService {
       'http://localhost:8080/api/register', 
       user
     ).pipe(catchError(this.handleError), tap(res => {
-      this.handleAuthentication(+res.id, res.email, res.firstname, res.lastname, res.password, res.role);
+      this.handleAuthentication(
+        +res.id,
+        res.email,
+        res.firstname,
+        res.lastname,
+        res.password,
+        res.role,
+        res.teams,
+        res.tasks);
     }));
   }
 
@@ -31,7 +41,15 @@ export class AuthService {
     ).pipe(catchError(this.handleError), tap(res => {
       console.log('auth service res:')
       console.log(res);
-      this.handleAuthentication(+res.id, res.email, res.firstname, res.lastname, res.password, res.role);
+      this.handleAuthentication(
+        +res.id,
+        res.email,
+        res.firstname,
+        res.lastname,
+        res.password,
+        res.role,
+        res.teams,
+        res.tasks);
     }));
   }
 
@@ -43,6 +61,8 @@ export class AuthService {
       lastname: string;
       password: string;
       role: string;
+      teams: Team[],
+      tasks: Task[]
     } = JSON.parse(localStorage.getItem('userData'));
     if (!userData) {
       return;
@@ -54,7 +74,9 @@ export class AuthService {
       userData.firstname,
       userData.lastname,
       userData.password,
-      userData.role
+      userData.role,
+      userData.teams,
+      userData.tasks
     );
 
     this.user.next(loadedUser);
@@ -67,8 +89,15 @@ export class AuthService {
   }
 
   private handleAuthentication(
-    id: number, email: string, firstname: string, lastname: string, password: string, role: string) {
-      const user = new User(id, email, firstname, lastname, password, role);
+    id: number,
+    email: string,
+    firstname: string,
+    lastname: string,
+    password: string,
+    role: string,
+    teams: Team[],
+    tasks: Task[]) {
+      const user = new User(id, email, firstname, lastname, password, role, teams, tasks);
       this.user.next(user);
       localStorage.setItem('userData', JSON.stringify(user));
   }
