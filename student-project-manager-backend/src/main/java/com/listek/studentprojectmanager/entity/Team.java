@@ -1,36 +1,68 @@
 package com.listek.studentprojectmanager.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Data;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "team")
-@Data
+@Table(name = "teams")
 public class Team {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id")
-  private Long id;
+  private long id;
 
   @Column(name = "name")
   private String name;
 
-  @Column(name = "code")
+  @Column(name = "code", unique = true)
   private String code;
 
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
-  private Set<Message> messages;
+  @ManyToMany(fetch = FetchType.LAZY,
+          cascade = {
+                  CascadeType.PERSIST,
+                  CascadeType.MERGE
+          },
+          mappedBy = "teams")
+  @JsonIgnore
+  private Set<User> users = new HashSet<>();
 
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
-  private Set<Task> tasks;
+  public Team() {
+  }
 
-  @ManyToMany
-  @JoinTable(
-    name = "user_team",
-    joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name = "team_id", referencedColumnName = "id"))
-  private Set<User> users;
+  public long getId() {
+    return id;
+  }
+
+  public void setId(long id) {
+    this.id = id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getCode() {
+    return code;
+  }
+
+  public void setCode(String code) {
+    this.code = code;
+  }
+
+  public Set<User> getUsers() {
+    return users;
+  }
+
+  public void setUsers(Set<User> users) {
+    this.users = users;
+  }
+
+
 }
