@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { take } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Team } from 'src/app/model/team.model';
 import { User } from 'src/app/model/user.model';
@@ -10,7 +9,7 @@ import { User } from 'src/app/model/user.model';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  user!: User;
+  user: User;
   isLoggedIn = false;
   isTeacher = false;
   currentTeam: Team;
@@ -19,8 +18,8 @@ export class NavbarComponent implements OnInit {
   
   ngOnInit() {
     this.authService.user.subscribe(user => {
-      this.user = user;
       if (user !== null) {
+        this.user = user;
         this.isLoggedIn = true;
         if (user.teams[0] !== undefined) {
           this.currentTeam = user.teams[0];
