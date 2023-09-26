@@ -1,9 +1,11 @@
 package com.listek.studentprojectmanager.controller;
 
+import com.listek.studentprojectmanager.dao.TeamRepository;
 import com.listek.studentprojectmanager.dto.LoginDto;
 import com.listek.studentprojectmanager.dto.UserDto;
 import com.listek.studentprojectmanager.entity.User;
 import com.listek.studentprojectmanager.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -13,14 +15,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 public class AuthController {
 
-    private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
+    @Autowired
+    private UserService userService;
 
-    public AuthController(UserService userService,
-                          PasswordEncoder passwordEncoder) {
-        this.userService = userService;
-        this.passwordEncoder = passwordEncoder;
-    }
+    @Autowired
+    private TeamRepository teamRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody UserDto userDto) {
@@ -49,6 +51,8 @@ public class AuthController {
         if (!passwordEncoder.matches(loginDto.getPassword(), existingUser.getPassword())) {
             return ResponseEntity.badRequest().body("WRONG_PASSWORD");
         }
+
+//        existingUser.setTeams(teamRepository.findTeamsByUsersId(existingUser.getId()));
 
         return ResponseEntity.ok().body(existingUser);
     }
