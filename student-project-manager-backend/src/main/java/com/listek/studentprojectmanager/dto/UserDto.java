@@ -7,16 +7,18 @@ public class UserDto {
     private String lastname;
     private String password;
     private String role;
+    private String code;
 
     public UserDto() {
     }
 
-    public UserDto(String email, String firstname, String lastname, String password, String role) {
+    public UserDto(String email, String firstname, String lastname, String password, String role, String code) {
         this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
         this.password = password;
         this.role = role;
+        this.code = code;
     }
 
     public String getEmail() {
@@ -57,5 +59,13 @@ public class UserDto {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }
