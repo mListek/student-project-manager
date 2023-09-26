@@ -3,12 +3,16 @@ package com.listek.studentprojectmanager.controller;
 import com.listek.studentprojectmanager.dao.TeamRepository;
 import com.listek.studentprojectmanager.dto.LoginDto;
 import com.listek.studentprojectmanager.dto.UserDto;
+import com.listek.studentprojectmanager.entity.Team;
 import com.listek.studentprojectmanager.entity.User;
+import com.listek.studentprojectmanager.service.TeamService;
 import com.listek.studentprojectmanager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Objects;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -17,6 +21,9 @@ public class AuthController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private TeamService teamService;
 
     @Autowired
     private TeamRepository teamRepository;
@@ -33,9 +40,21 @@ public class AuthController {
             return ResponseEntity.badRequest().body("ALREADY_EXISTS");
         }
 
-        userService.saveUser(userDto);
+        if (Objects.equals(userDto.getRole(), "student")) {
+            Team team = teamService.findTeamByCode(userDto.getCode());
+            if (team == null)
+                return ResponseEntity.badRequest().body("WRONG_CODE");
+        }
 
-        User createdUser = userService.findUserByEmail(userDto.getEmail());
+        User createdUser = userService.saveUser(userDto);
+
+        if (Objects.equals(userDto.getRole(), "teacher")) {
+            teamService.createTeamAndAddUser(createdUser);
+        } else {
+            Team team = teamService.findTeamByCode(userDto.getCode());
+
+            userService.addUserToTeam(createdUser, team);
+        }
 
         return ResponseEntity.ok().body(createdUser);
     }
@@ -51,8 +70,6 @@ public class AuthController {
         if (!passwordEncoder.matches(loginDto.getPassword(), existingUser.getPassword())) {
             return ResponseEntity.badRequest().body("WRONG_PASSWORD");
         }
-
-//        existingUser.setTeams(teamRepository.findTeamsByUsersId(existingUser.getId()));
 
         return ResponseEntity.ok().body(existingUser);
     }
