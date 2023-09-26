@@ -1,9 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { exhaustMap, map, take } from 'rxjs/operators';
-import { Team } from '../model/team.model';
-import { AuthService } from '../auth/auth.service';
+import { User } from '../model/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,26 +8,13 @@ import { AuthService } from '../auth/auth.service';
 export class TeamService {
   private baseUrl = 'http://localhost:8080/api/';
 
-  constructor(private authService: AuthService,
-              private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getTeamList(): Observable<Team[]> {
-    return this.http.get<TeamResponseData>(`${this.baseUrl}teams`).pipe(
-      map(response => response._embedded.teams)
-    );
+  getMembersOfTeam(id: number) {
+    // return this.http.get<User[]>(`${this.baseUrl}teams/${id}/users`);
   }
 
-  getUserTeams() {
-    return this.authService.user.pipe(exhaustMap(user => {
-      return this.http.get<TeamResponseData>(`${this.baseUrl}users/${user.id}/teams`);
-    }),
-      map(response => response._embedded.teams)
-    );
-  }
-}
-
-interface TeamResponseData {
-  _embedded: {
-    teams: Team[];
+  deleteMember(userId: number, teamId: number) {
+    // return this.http.delete(`${this.baseUrl}users/${userId}/teams/${teamId}`);
   }
 }
