@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
-import { User } from 'src/app/model/user.model';
+import { UserRequest } from 'src/app/model/user-request.model';
 
 @Component({
   selector: 'app-register-page',
@@ -18,20 +18,38 @@ export class RegisterPageComponent {
   onRegister(form: NgForm) {
     if (!form.valid) return;
 
+    if (form.value.repeatPassword !== form.value.password) {
+      this.error = 'Hasła nie są takie same!';
+      return;
+    }
+
+    if (form.value.repeatEmail !== form.value.email) {
+      this.error = 'Emaile nie są takie same!';
+      return;
+    }
+
+    if (!form.value.teacher && !form.value.code) {
+      this.error = 'Konto studenta wymaga podania kodu grupy!';
+      return;
+    }
+
+    if (form.value.teacher && form.value.code) {
+      this.error = 'Dla konta wykładowcy nie wpisuj kodu grupy!';
+      return;
+    }
     const role = form.value.teacher ? 'teacher' : 'student';
 
-    const user: User = new User(
-      -1,
+    const userRequest: UserRequest = new UserRequest(
       form.value.email,
       form.value.firstname,
       form.value.lastname,
       form.value.password,
       role,
-      [],
-      []
+      form.value.code
     );
     
-    this.authService.signup(user).subscribe(
+    
+    this.authService.signup(userRequest).subscribe(
       resData => {
         console.log('Register page component data...');
         console.log(resData);
@@ -40,7 +58,7 @@ export class RegisterPageComponent {
       error => {
         this.error = error;
       }
-    );
-    form.reset();
+      );
+      form.reset();
   }
 }
