@@ -6,6 +6,7 @@ import { BehaviorSubject, throwError } from "rxjs";
 import { Router } from "@angular/router";
 import { Team } from "../model/team.model";
 import { Task } from "../model/task.model";
+import { UserRequest } from "../model/user-request.model";
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -14,10 +15,10 @@ export class AuthService {
   constructor(private http: HttpClient,
               private router: Router) {}
 
-  signup(user: User) {
+  signup(userRequest: UserRequest) {
     return this.http.post<User>(
       'http://localhost:8080/api/register', 
-      user
+      userRequest
     ).pipe(catchError(this.handleError), tap(res => {
       this.handleAuthentication(
         +res.id,
@@ -103,6 +104,7 @@ export class AuthService {
   }
 
   private handleError(errorRes: HttpErrorResponse) {
+    console.log(errorRes);
     let errorMessage = 'Wystąpił niespodziewany błąd!';
     if (!errorRes.error) {
       return throwError(() => errorRes);
@@ -113,6 +115,8 @@ export class AuthService {
       errorMessage = 'Wpisano błędne hasło!';
     } else if (errorRes.error === "ALREADY_EXISTS") {
       errorMessage = 'Taki użytkownik już istnieje!';
+    } else if (errorRes.error === "WRONG_CODE") {
+      errorMessage = 'Błędny kod grupy!';
     }
     return throwError(() => errorMessage);
   }
