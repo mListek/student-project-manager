@@ -1,6 +1,6 @@
 <div class="container">
   <div class="header">
-    <h1 class="header-text">2K331/BD</h1>
+    <h1 class="header-text">{{ currentTeam.name }}</h1>
   </div>
   <div class="main-content">
     <div class="group-header__container">
@@ -8,35 +8,10 @@
       <div class="border__line--vertical"></div>
       <p class="group__text">Usuń</p>
     </div>
-    <div class="group-container">
-      <p class="group__text">Michał Listek</p>
+    <div class="group-container" *ngFor="let member of teamMembers">
+      <p class="group__text">{{ member.firstname + ' ' + member.lastname }}</p>
       <div class="border__line--vertical"></div>
-      <button class="delete-button" type="button">Usuń z Grupy</button>
-    </div>
-    <div class="group-container">
-      <p class="group__text">Michał Listek</p>
-      <div class="border__line--vertical"></div>
-      <button class="delete-button" type="button">Usuń z Grupy</button>
-    </div>
-    <div class="group-container">
-      <p class="group__text">Michał Listek</p>
-      <div class="border__line--vertical"></div>
-      <button class="delete-button" type="button">Usuń z Grupy</button>
-    </div>
-    <div class="group-container">
-      <p class="group__text">Michał Listek</p>
-      <div class="border__line--vertical"></div>
-      <button class="delete-button" type="button">Usuń z Grupy</button>
-    </div>
-    <div class="group-container">
-      <p class="group__text">Michał Listek</p>
-      <div class="border__line--vertical"></div>
-      <button class="delete-button" type="button">Usuń z Grupy</button>
-    </div>
-    <div class="group-container">
-      <p class="group__text">Michał Listek</p>
-      <div class="border__line--vertical"></div>
-      <button class="delete-button" type="button">Usuń z Grupy</button>
+      <button class="delete-button" type="button" (click)="onMemberDelete(member.id)">Usuń z Grupy</button>
     </div>
   </div>
 </div>
