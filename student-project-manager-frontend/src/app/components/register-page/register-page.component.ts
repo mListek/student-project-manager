@@ -41,8 +41,8 @@ export class RegisterPageComponent {
 
     const userRequest: UserRequest = new UserRequest(
       form.value.email,
-      form.value.firstname,
-      form.value.lastname,
+      form.value.firstName,
+      form.value.lastName,
       form.value.password,
       role,
       form.value.code

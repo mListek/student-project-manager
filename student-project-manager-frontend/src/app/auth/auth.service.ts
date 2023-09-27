@@ -23,8 +23,8 @@ export class AuthService {
       this.handleAuthentication(
         +res.id,
         res.email,
-        res.firstname,
-        res.lastname,
+        res.firstName,
+        res.lastName,
         res.password,
         res.role,
         res.teams,
@@ -45,8 +45,8 @@ export class AuthService {
       this.handleAuthentication(
         +res.id,
         res.email,
-        res.firstname,
-        res.lastname,
+        res.firstName,
+        res.lastName,
         res.password,
         res.role,
         res.teams,
@@ -58,8 +58,8 @@ export class AuthService {
     const userData: {
       id: number;
       email: string;
-      firstname: string;
-      lastname: string;
+      firstName: string;
+      lastName: string;
       password: string;
       role: string;
       teams: Team[],
@@ -72,8 +72,8 @@ export class AuthService {
     const loadedUser = new User(
       userData.id,
       userData.email,
-      userData.firstname,
-      userData.lastname,
+      userData.firstName,
+      userData.lastName,
       userData.password,
       userData.role,
       userData.teams,
@@ -92,13 +92,13 @@ export class AuthService {
   private handleAuthentication(
     id: number,
     email: string,
-    firstname: string,
-    lastname: string,
+    firstName: string,
+    lastName: string,
     password: string,
     role: string,
     teams: Team[],
     tasks: Task[]) {
-      const user = new User(id, email, firstname, lastname, password, role, teams, tasks);
+      const user = new User(id, email, firstName, lastName, password, role, teams, tasks);
       this.user.next(user);
       localStorage.setItem('userData', JSON.stringify(user));
   }
