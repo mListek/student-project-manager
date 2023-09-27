@@ -9,9 +9,12 @@
       <p class="group__text">Usuń</p>
     </div>
     <div class="group-container" *ngFor="let member of teamMembers">
-      <p class="group__text">{{ member.firstname + ' ' + member.lastname }}</p>
+      <p class="group__text">{{ member.firstName + ' ' + member.lastName }}</p>
       <div class="border__line--vertical"></div>
-      <button class="delete-button" type="button" (click)="onMemberDelete(member.id)">Usuń z Grupy</button>
+      <button
+        class="delete-button"
+        type="button"
+        (click)="onMemberDelete(member.id)">Usuń z Grupy</button>
     </div>
   </div>
 </div>
