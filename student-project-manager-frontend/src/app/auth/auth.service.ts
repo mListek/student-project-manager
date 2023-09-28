@@ -89,6 +89,24 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
+  updateUser(user: User) {
+    return this.http.put<User>(`http://localhost:8080/api/users/${user.id}`,
+      user
+    ).pipe(tap(res => {
+      console.log('auth service res:')
+      console.log(res);
+      this.handleAuthentication(
+        +res.id,
+        res.email,
+        res.firstName,
+        res.lastName,
+        res.password,
+        res.role,
+        res.teams,
+        res.tasks);
+    }));
+  }
+
   private handleAuthentication(
     id: number,
     email: string,
