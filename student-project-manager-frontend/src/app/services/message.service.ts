@@ -8,7 +8,7 @@ import { Message } from "../model/message.model";
 })
 export class MessageService {
 
-  private baseUrl = 'http://localhost:8080/api/messages';
+  private baseUrl = 'http://localhost:8080/api/';
 
   constructor(private http: HttpClient) { }
 
@@ -16,6 +16,23 @@ export class MessageService {
     return this.http.get<MessageResponseData>(this.baseUrl).pipe(
       map(response => response._embedded.messages)
     );
+  }
+
+  getTeamMessages(teamId: number) {
+    return this.http.get<Message[]>(
+      `${this.baseUrl}teams/${teamId}/messages`
+    )
+  }
+
+  createMessage(label: string, userId: number, teamId: number) {
+    return this.http.post(
+      `${this.baseUrl}messages`,
+      {
+        label: label,
+        userId: userId,
+        teamId: teamId
+      }
+    )
   }
 }
 
