@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "teams")
@@ -30,6 +31,12 @@ public class Team {
   private Set<User> users = new HashSet<>();
 
   public Team() {
+    this.code = UUID.randomUUID().toString().replace("-", "").substring(20);
+  }
+
+  public Team(String name) {
+    this.name = name;
+    this.code = UUID.randomUUID().toString().replace("-", "").substring(20);
   }
 
   public long getId() {
