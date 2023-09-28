@@ -3,34 +3,40 @@
     <h1 class="header-text">Zadania</h1>
   </div>
   <div class="main-content">
-    <form class="task-form">
-      <label for="task-name" class="form-label">Zadanie:</label>
-      <input type="text" id="task-name" class="form-control" />
+    <form class="task-form" (ngSubmit)="onCreateTask(f)" #f="ngForm">
+      <label for="taskName" class="form-label">Zadanie:</label>
+      <input type="text" id="taskName" name="taskName" ngModel required class="form-control" />
       <button class="submit-button" type="submit">Dodaj Zadanie</button>
     </form>
     <div class="kanban">
       <div class="kanban__column">
         <h2 class="column__header">Do zrobienia</h2>
         <hr class="column__line">
-        <div class="column__task">
-          <p class="task__text">Dodać spis treści</p>
-        </div>
+        <a [routerLink]="'/tasks/' + task.id" class="column__task" *ngFor="let task of todoTasks">
+          <div>
+            <p class="task__text">{{ task.description }}</p>
+          </div>
+        </a>
       </div>
       <div class="kanban__line"></div>
       <div class="kanban__column">
         <h2 class="column__header">W trakcie</h2>
         <hr class="column__line">
-        <div class="column__task">
-          <p class="task__text">Stworzyć stronę główną</p>
-        </div>
+        <a [routerLink]="'/tasks/' + task.id" class="column__task" *ngFor="let task of doingTasks">
+          <div>
+            <p class="task__text">{{ task.description }}</p>
+          </div>
+        </a>
       </div>
       <div class="kanban__line"></div>
       <div class="kanban__column">
         <h2 class="column__header">Zrobione</h2>
         <hr class="column__line">
-        <div class="column__task">
-          <p class="task__text">Zainicjalizować projekt</p>
-        </div>
+        <a [routerLink]="'/tasks/' + task.id" class="column__task" *ngFor="let task of doneTasks">
+          <div>
+            <p class="task__text">{{ task.description }}</p>
+          </div>
+        </a>
       </div>
     </div>
   </div>
