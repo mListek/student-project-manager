@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { AuthService } from 'src/app/auth/auth.service';
 import { Task } from 'src/app/model/task.model';
+import { Team } from 'src/app/model/team.model';
+import { User } from 'src/app/model/user.model';
 import { TaskService } from 'src/app/services/task.service';
+import { TeamService } from 'src/app/services/team.service';
 
 @Component({
   selector: 'app-task-page',
@@ -9,21 +13,35 @@ import { TaskService } from 'src/app/services/task.service';
   styleUrls: ['./task-page.component.css']
 })
 export class TaskPageComponent implements OnInit {
+  user: User;
+  currentTeam: Team;
   todoTasks: Task[] = [];
   doingTasks: Task[] = [];
   doneTasks: Task[] = [];
 
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService,
+              private authService: AuthService,
+              private teamService: TeamService) {}
 
   ngOnInit() {
-    this.getTasks();
+    this.authService.user.subscribe(user => {
+      if (user !== null) {
+        this.user = user;
+      }
+    });
+    this.teamService.currentTeam.subscribe(currentTeam => {
+      if (currentTeam !== null) {
+        this.currentTeam = currentTeam;
+        this.getTeamTasks(currentTeam.id);
+      }
+    });
   }
 
   onCreateTask(form: NgForm) {
-    this.taskService.createTask(form.value.taskName).subscribe(
+    this.taskService.createTask(form.value.taskName, this.user.id, this.currentTeam.id).subscribe(
       res => {
         console.log(res);
-        this.getTasks();
+        this.getTeamTasks(this.currentTeam.id);
       },
       err => {
         console.log(err);
@@ -32,8 +50,8 @@ export class TaskPageComponent implements OnInit {
     form.reset();
   }
 
-  private getTasks() {
-    this.taskService.getTaskList().subscribe(
+  private getTeamTasks(teamId: number) {
+    this.taskService.getTeamTasks(teamId).subscribe(
       res => {
         this.todoTasks = [];
         this.doingTasks = [];
