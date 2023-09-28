@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
         this.user = user;
         this.isLoggedIn = true;
         if (user.teams[0] !== undefined) {
-          this.currentTeam = user.teams[0];
+          this.teamService.setCurrentTeam(user.teams[0]);
         }
         if (user.role === 'teacher') {
           this.isTeacher = true;
