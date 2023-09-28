@@ -41,24 +41,24 @@
 
 .messages__list {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   height: 500px;
   overflow-y: scroll;
 }
 
-.message-container {
+.message-container, .message-container--self {
   width: 45%;
   position: relative;
   margin: 5px 25px;
 }
 
 /* Temporary */
-.message-container:nth-child(odd) {
+.message-container--self {
   margin-left: auto;
 }
 
 /* Temporary */
-.message-container:nth-child(odd) > .message__content {
+.message-container--self > .message__content {
   background-color: rgba(23, 98, 167, 50%);
 }
 
