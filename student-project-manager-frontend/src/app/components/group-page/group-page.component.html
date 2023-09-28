@@ -11,46 +11,27 @@
         <div class="border__line--vertical"></div>
         <p class="group__text">Usuń</p>
       </div>
-      <div class="group-container">
-        <p class="group__text">2K431/BD</p>
+      <a
+        class="group-container"
+        *ngFor="let team of teams"
+        (click)="chooseCurrentTeam(team)">
+        <p class="group__text">{{ team.name }}</p>
         <div class="border__line--vertical"></div>
-        <p class="group__text">2xc7!df</p>
-        <div class="border__line--vertical"></div>
-        <button class="delete-button" type="button">Usuń</button>
-      </div>
-      <div class="group-container">
-        <p class="group__text">2K431/BD</p>
-        <div class="border__line--vertical"></div>
-        <p class="group__text">2xc7!df</p>
+        <p class="group__text">{{ team.code }}</p>
         <div class="border__line--vertical"></div>
         <button class="delete-button" type="button">Usuń</button>
-      </div>
-      <div class="group-container">
-        <p class="group__text">2K431/BD</p>
-        <div class="border__line--vertical"></div>
-        <p class="group__text">2xc7!df</p>
-        <div class="border__line--vertical"></div>
-        <button class="delete-button" type="button">Usuń</button>
-      </div>
-      <div class="group-container">
-        <p class="group__text">2K431/BD</p>
-        <div class="border__line--vertical"></div>
-        <p class="group__text">2xc7!df</p>
-        <div class="border__line--vertical"></div>
-        <button class="delete-button" type="button">Usuń</button>
-      </div>
-      <div class="group-container">
-        <p class="group__text">2K431/BD</p>
-        <div class="border__line--vertical"></div>
-        <p class="group__text">2xc7!df</p>
-        <div class="border__line--vertical"></div>
-        <button class="delete-button" type="button">Usuń</button>
-      </div>
+      </a>
     </div>
     <div class="border-line"></div>
-    <form class="group-form">
-      <label for="group-name" class="form-label">Nazwa:</label>
-      <input type="text" id="group-name" class="form-control" />
+    <form class="group-form" (ngSubmit)="onCreateGroup(f)" #f="ngForm">
+      <label for="teamName" class="form-label">Nazwa:</label>
+      <input
+        type="text"
+        id="teamName"
+        class="form-control"
+        name="teamName"
+        ngModel
+        required />
       <button class="submit-button" type="submit">Stwórz Grupę</button>
     </form>
   </div>
