@@ -72,6 +72,8 @@
   align-items: center;
   justify-content: center;
   margin: 5px 0;
+  color: #fff;
+  text-decoration: none;
 }
 
 .kanban__line {
