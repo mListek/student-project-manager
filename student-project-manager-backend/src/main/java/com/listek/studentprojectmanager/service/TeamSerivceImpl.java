@@ -19,18 +19,13 @@ public class TeamSerivceImpl implements TeamService{
     private UserRepository userRepository;
 
     @Override
-    public void saveTeam(Team team) {
-    }
-
-    @Override
     public Team findTeamByCode(String code) {
         return teamRepository.findByCode(code);
     }
 
     public void createTeamAndAddUser(User user) {
         Team team = new Team();
-        team.setName("NG-001");
-        team.setCode(UUID.randomUUID().toString().replace("-", "").substring(20));
+        team.setName("Domyślna grupa");
 
         user.addTeam(team);
 
