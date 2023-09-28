@@ -21,7 +21,7 @@ export class MessageService {
   getTeamMessages(teamId: number) {
     return this.http.get<Message[]>(
       `${this.baseUrl}teams/${teamId}/messages`
-    )
+    );
   }
 
   createMessage(label: string, userId: number, teamId: number) {
@@ -32,7 +32,7 @@ export class MessageService {
         userId: userId,
         teamId: teamId
       }
-    )
+    );
   }
 }
 
