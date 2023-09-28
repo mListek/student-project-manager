@@ -18,6 +18,16 @@ export class TaskService {
       map(response => response._embedded.tasks)
     );
   }
+
+  createTask(description: string) {
+    return this.http.post(`http://localhost:8080/api/teams/1/tasks`,
+      {
+        teamId: 1,
+        description: description,
+        status: 'todo',
+        userId: 1
+      })
+  }
 }
 
 interface TaskResponseData {
