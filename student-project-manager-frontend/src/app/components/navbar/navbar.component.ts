@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Team } from 'src/app/model/team.model';
 import { User } from 'src/app/model/user.model';
+import { TeamService } from 'src/app/services/team.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +15,8 @@ export class NavbarComponent implements OnInit {
   isTeacher = false;
   currentTeam: Team;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService,
+              private teamService: TeamService) {}
   
   ngOnInit() {
     this.authService.user.subscribe(user => {
@@ -29,6 +31,16 @@ export class NavbarComponent implements OnInit {
         }
       }
     });
+    this.teamService.currentTeam.subscribe(
+      res => {
+        if (res !== null) {
+          this.currentTeam = res;
+        }
+      },
+      err => {
+        console.log(err);
+      }
+    )
   }
 
   onLogout() {
