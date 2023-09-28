@@ -59,6 +59,7 @@
 
 .group-container {
   background-color: rgba(217, 217, 217, 15%);
+  cursor: pointer;
 }
 
 .group__text, .border__line--vertical, .delete-button {
