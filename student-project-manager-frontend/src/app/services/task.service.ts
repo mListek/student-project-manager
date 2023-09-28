@@ -9,23 +9,28 @@ import { Task } from '../model/task.model';
 })
 export class TaskService {
 
-  private baseUrl = 'http://localhost:8080/api/tasks';
+  private baseUrl = 'http://localhost:8080/api/';
 
   constructor(private http: HttpClient) { }
 
   getTaskList(): Observable<Task[]> {
-    return this.http.get<TaskResponseData>(this.baseUrl).pipe(
+    return this.http.get<TaskResponseData>(this.baseUrl + 'tasks').pipe(
       map(response => response._embedded.tasks)
     );
   }
 
-  createTask(description: string) {
-    return this.http.post(`http://localhost:8080/api/teams/1/tasks`,
+  getTeamTasks(teamId: number) {
+    return this.http.get<Task[]>(
+      `${this.baseUrl}teams/${teamId}/tasks`
+    );
+  }
+
+  createTask(description: string, userId: number, teamId: number) {
+    return this.http.post(`${this.baseUrl}tasks`,
       {
-        teamId: 1,
+        teamId: teamId,
         description: description,
-        status: 'todo',
-        userId: 1
+        userId: userId
       })
   }
 }
