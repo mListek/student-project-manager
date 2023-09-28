@@ -40,12 +40,13 @@ public class Task {
   private Set<User> users = new HashSet<>();
 
   public Task() {
+    this.status = "todo";
   }
 
-  public Task(Team team, String description, String status) {
+  public Task(Team team, String description) {
     this.team = team;
     this.description = description;
-    this.status = status;
+    this.status = "todo";
   }
 
   public long getId() {
