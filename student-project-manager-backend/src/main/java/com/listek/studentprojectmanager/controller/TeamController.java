@@ -2,6 +2,7 @@ package com.listek.studentprojectmanager.controller;
 
 import com.listek.studentprojectmanager.dao.TeamRepository;
 import com.listek.studentprojectmanager.dao.UserRepository;
+import com.listek.studentprojectmanager.dto.TeamRequest;
 import com.listek.studentprojectmanager.entity.Team;
 import com.listek.studentprojectmanager.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,19 @@ public class TeamController {
 
     @Autowired
     private TeamRepository teamRepository;
+
+    @PostMapping("/teams")
+    public ResponseEntity<?> createTeam(@RequestBody TeamRequest teamRequest) {
+        System.out.println(teamRequest.getName() + teamRequest.getUserId());
+        Team team = new Team(teamRequest.getName());
+
+        Team newTeam = teamRepository.save(team);
+        User user = userRepository.findById(teamRequest.getUserId());
+        user.addTeam(newTeam);
+        teamRepository.save(newTeam);
+
+        return new ResponseEntity<>(newTeam, HttpStatus.OK);
+    }
 
 //    @GetMapping("/users/{userId}/teams")
 //    public ResponseEntity<Set<Team>> getAllTeamsByUserId(@PathVariable(value = "userId") Long userId) {
