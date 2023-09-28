@@ -4,65 +4,38 @@
   </div>
   <div class="main-content">
     <div class="messages__list">
-      <div class="message-container">
-        <div class="message__info">
-          <p class="message__author">Michał Listek</p>
-          <p class="message__timestamp">12:34</p>
+      <div *ngFor="let message of messages">
+        <div class="message-container--self" *ngIf="message.user.id === this.user.id">
+          <div class="message__info">
+            <p class="message__author">{{ message.user.firstName + ' ' + message.user.lastName }}</p>
+            <p class="message__timestamp">{{ message.creationDate.substring(11, 16) }}</p>
+          </div>
+          <div class="message__content">
+            <p class="content__text">{{ message.label }}</p>
+          </div>
         </div>
-        <div class="message__content">
-          <p class="content__text">Witam wszystkich w nowym projekcie</p>
-        </div>
-      </div>
-      <div class="message-container">
-        <div class="message__info">
-          <p class="message__timestamp">12:35</p>
-          <p class="message__author">Adam Kowalski</p>
-        </div>
-        <div class="message__content">
-          <p class="content__text">Cześć, witam wszystkich</p>
-        </div>
-      </div>
-      <div class="message-container">
-        <div class="message__info">
-          <p class="message__timestamp">12:35</p>
-          <p class="message__author">Adam Kowalski</p>
-        </div>
-        <div class="message__content">
-          <p class="content__text">Cześć, witam wszystkich</p>
-        </div>
-      </div>
-      <div class="message-container">
-        <div class="message__info">
-          <p class="message__author">Michał Listek</p>
-          <p class="message__timestamp">12:34</p>
-        </div>
-        <div class="message__content">
-          <p class="content__text">Witam wszystkich w nowym projekcie</p>
-        </div>
-      </div>
-      <div class="message-container">
-        <div class="message__info">
-          <p class="message__timestamp">12:35</p>
-          <p class="message__author">Adam Kowalski</p>
-        </div>
-        <div class="message__content">
-          <p class="content__text">Cześć, witam wszystkich</p>
-        </div>
-      </div>
-      <div class="message-container">
-        <div class="message__info">
-          <p class="message__timestamp">12:35</p>
-          <p class="message__author">Adam Kowalski</p>
-        </div>
-        <div class="message__content">
-          <p class="content__text">Cześć, witam wszystkich</p>
+        <div class="message-container" *ngIf="message.user.id !== this.user.id">
+          <div class="message__info">
+            <p class="message__timestamp">{{ message.creationDate.substring(11, 16) }}</p>
+            <p class="message__author">{{ message.user.firstName + ' ' + message.user.lastName }}</p>
+          </div>
+          <div class="message__content">
+            <p class="content__text">{{ message.label }}</p>
+          </div>
         </div>
       </div>
     </div>
     <div class="border-line"></div>
-    <form class="message-form">
-      <label for="message-name" class="form-label">Wiadomość:</label>
-      <input type="text" id="message-name" class="form-control" />
+    <form class="message-form" (ngSubmit)="onSendMessage(f)" #f="ngForm">
+      <label for="messageContent" class="form-label">Wiadomość:</label>
+      <input
+        type="text"
+        id="messageContent"
+        name="messageContent"
+        ngModel
+        required
+        class="form-control"
+        />
       <button class="submit-button" type="submit">Wyślij</button>
     </form>
   </div>
