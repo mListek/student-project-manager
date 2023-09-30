@@ -111,6 +111,10 @@
   margin-left: 20px;
 }
 
+.category-button:disabled {
+  background-color: #1e1f25;
+}
+
 .section__content {
   display: flex;
 }
