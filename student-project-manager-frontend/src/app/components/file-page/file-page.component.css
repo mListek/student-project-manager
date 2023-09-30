@@ -74,6 +74,7 @@
 .file__name {
   max-width: 90%;
   word-wrap: break-word;
+  color: #fff;
 }
 
 .delete-button {
