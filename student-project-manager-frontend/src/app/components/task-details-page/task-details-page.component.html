@@ -7,16 +7,18 @@
       <div class="content__section">
         <h3 class="section-header">Treść zadania:</h3>
         <hr class="section-line">
-        <div class="section__input">
-          <textarea class="section__text" rows="6" placeholder="Stworzyć stronę główną"></textarea>
-          <button class="edit-button" type="button">Edytuj</button>
-        </div>
+        <form class="section__input" (ngSubmit)="onEdit(f)" #f="ngForm" *ngIf="currentTask">
+          <textarea
+            class="section__text"
+            rows="6"
+            name="description"
+            required
+            [(ngModel)]="currentTask.description"></textarea>
+          <button class="edit-button" type="submit">Zapisz</button>
+        </form>
       </div>
       <div class="content__line--vertical"></div>
       <div class="content__section">
-        <h3 class="section-header">Autor:</h3>
-        <hr class="section-line">
-        <p class="user-name">&#x2022; Michał Listek</p>
         <h3 class="section-header">Przypisane osoby:</h3>
         <hr class="section-line">
         <div class="section__users">
@@ -34,12 +36,30 @@
       </div>
     </div>
     <div class="content__lower">
-      <div class="content__section">
+      <div class="content__section" *ngIf="currentTask">
         <h3 class="section-header">Kategoria:</h3>
         <hr class="section-line">
-        <button class="category-button" type="button">Do zrobienia</button>
-        <button class="category-button" type="button">W trakcie</button>
-        <button class="category-button" type="button">Zrobione</button>
+        <button
+          class="category-button"
+          type="button"
+          value="todo"
+          #todo
+          [disabled]="currentTask.status == 'todo'"
+          (click)="changeStatus(todo)">Do zrobienia</button>
+        <button
+          class="category-button"
+          type="button"
+          value="inprogress"
+          #inprogress
+          [disabled]="currentTask.status == 'inprogress'"
+          (click)="changeStatus(inprogress)">W trakcie</button>
+        <button
+          class="category-button"
+          type="button"
+          value="done"
+          #done
+          [disabled]="currentTask.status == 'done'"
+          (click)="changeStatus(done)">Zrobione</button>
       </div>
       <div class="content__section">
         <h3 class="section-header">Usuwanie:</h3>
