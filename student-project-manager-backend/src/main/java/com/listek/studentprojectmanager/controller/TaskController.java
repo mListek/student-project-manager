@@ -48,4 +48,8 @@ public class TaskController {
 
         return new ResponseEntity<>(taskRepository.save(task), HttpStatus.OK);
     }
+
+    @PutMapping ResponseEntity<Task> updateTask(@RequestBody Task task) {
+        return new ResponseEntity<>(taskRepository.save(task), HttpStatus.OK);
+    }
 }
