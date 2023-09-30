@@ -19,6 +19,10 @@ export class TaskService {
     );
   }
 
+  getTask(taskId: number) {
+    return this.http.get<Task>(`${this.baseUrl}tasks/${taskId}`);
+  }
+
   getTeamTasks(teamId: number) {
     return this.http.get<Task[]>(
       `${this.baseUrl}teams/${teamId}/tasks`
@@ -32,6 +36,10 @@ export class TaskService {
         description: description,
         userId: userId
       })
+  }
+
+  updateTask(task: Task) {
+    return this.http.put(`${this.baseUrl}tasks/${task.id}`, task);
   }
 }
 
