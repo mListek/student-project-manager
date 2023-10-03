@@ -10,4 +10,5 @@ import java.util.List;
 @CrossOrigin("http://localhost:4200")
 public interface TaskRepository extends JpaRepository<Task, Long> {
     List<Task> findByTeamId(Long teamId);
+    Task findById(long taskId);
 }
