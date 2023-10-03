@@ -1,6 +1,7 @@
 package com.listek.studentprojectmanager.controller;
 
 import com.listek.studentprojectmanager.dao.TeamRepository;
+import com.listek.studentprojectmanager.dao.UserRepository;
 import com.listek.studentprojectmanager.dto.LoginDto;
 import com.listek.studentprojectmanager.dto.UserDto;
 import com.listek.studentprojectmanager.entity.Team;
@@ -8,6 +9,7 @@ import com.listek.studentprojectmanager.entity.User;
 import com.listek.studentprojectmanager.service.TeamService;
 import com.listek.studentprojectmanager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +29,9 @@ public class AuthController {
 
     @Autowired
     private TeamRepository teamRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -72,5 +77,18 @@ public class AuthController {
         }
 
         return ResponseEntity.ok().body(existingUser);
+    }
+
+    @DeleteMapping("/users/{userId}")
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable(name = "userId") long userId) {
+
+        User user = userRepository.findById(userId);
+        user.setEmail(user.getEmail() + "deleted");
+        user.setPassword("user_deleted");
+        user.setLastName(user.getLastName() + " (konto usunięte)");
+
+        userRepository.save(user);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
