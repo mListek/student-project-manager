@@ -22,16 +22,24 @@
         <h3 class="section-header">Przypisane osoby:</h3>
         <hr class="section-line">
         <div class="section__users">
-          <div class="user__list">
-            <p class="user-name">&#x2022; Michał Listek</p>
-            <button class="delete-button" type="button">Usuń</button>
+          <div class="user__list" *ngFor="let user of taskUsers">
+            <p class="user-name">&#x2022; {{ user.firstName + ' ' + user.lastName }}</p>
+            <button class="delete-button" type="button" (click)="deleteTaskUser(user.id)">Usuń</button>
           </div>
-          <div class="user__add">
-            <select name="users" id="users" class="user__select">
-              <option value="user">Adam Kowalski</option>
+          <form class="user__add" #f="ngForm" (ngSubmit)="onAddUser(f)">
+            <select
+              name="users"
+              ngModel
+              id="users"
+              class="user__select"
+              (click)="filterOptions()">
+              <option
+                *ngFor="let user of membersOfTeam"
+                [value]="user.id"
+                >{{ user.firstName + ' ' + user.lastName }}</option>
             </select>
-            <button class="add-button" type="button">Dodaj</button>
-          </div>
+            <button class="add-button" type="submit">Dodaj</button>
+          </form>
         </div>
       </div>
     </div>
@@ -66,11 +74,9 @@
         <hr class="section-line">
         <div class="section__content">
           <p class="content__text">Usuń to zadanie. Operacja nieodwracalna!</p>
-          <button class="delete-button" type="button">Usuń zadanie</button>
+          <button class="delete-button" type="button" (click)="onDeleteTask()">Usuń zadanie</button>
         </div>
       </div>
     </div>
-    <div class="border-line"></div>
-    <button class="submit-button" type="button">Zatwierdź zmiany</button>
   </div>
 </div>
