@@ -38,41 +38,18 @@ public class TeamController {
         return new ResponseEntity<>(newTeam, HttpStatus.OK);
     }
 
-//    @GetMapping("/users/{userId}/teams")
-//    public ResponseEntity<Set<Team>> getAllTeamsByUserId(@PathVariable(value = "userId") Long userId) {
-//        if (!userRepository.existsById(userId)) {
-//            throw new ResourceNotFoundException("Not found User with id = " + userId);
-//        }
-//
-//        Set<Team> teams = teamRepository.findTeamsByUsersId(userId);
-//        return new ResponseEntity<>(teams, HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/teams/{teamId}/users")
-//    public ResponseEntity<List<User>> getAllUsersByTeamId(@PathVariable(value = "teamId") Long teamId) {
-//        if (!teamRepository.existsById(teamId)) {
-//            throw new ResourceNotFoundException("Not found Team with id = " + teamId);
-//        }
-//
-//        List<User> users = userRepository.findUsersByTeamsId(teamId);
-//
-//        return new ResponseEntity<>(users, HttpStatus.OK);
-//    }
-//
-//    @DeleteMapping("/users/{userId}/teams/{teamId}")
-//    public ResponseEntity<HttpStatus> deleteTeamFromUser(
-//            @PathVariable(value = "userId") Long userId,
-//            @PathVariable(value = "teamId") Long teamId) {
-//        System.out.println("userid" + userId+ "teamid" + teamId);
-//        User user = userRepository.findById(userId)
-//                .orElseThrow(() -> new ResourceNotFoundException("Not found User with id: " + userId));
-//
-//        System.out.println(user.toString());
-//        user.setTeams(teamRepository.findTeamsByUsersId(userId));
-//        user.removeTeam(teamId);
-//        System.out.println(user.toString());
-//        userRepository.save(user);
-//
-//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//    }
+    @DeleteMapping("/users/{userId}/teams/{teamId}")
+    public ResponseEntity<?> deleteTeamFromUser(
+            @PathVariable(value = "userId") Long userId,
+            @PathVariable(value = "teamId") Long teamId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("Not found User with id: " + userId));
+
+        if (user.getTeams().size() > 1) {
+            user.removeTeam(teamId);
+            userRepository.save(user);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return ResponseEntity.badRequest().body("LAST_GROUP");
+    }
 }
