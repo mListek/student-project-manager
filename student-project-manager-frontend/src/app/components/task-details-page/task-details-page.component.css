@@ -85,8 +85,7 @@
 .user__select {
   height: 25px;
   width: 150px;
-  background-color: rgba(217, 217, 217, 50%);
-  color: #fff;
+  background-color: rgb(217, 217, 217);
   text-align: center;
   border-radius: 25px;
 }
