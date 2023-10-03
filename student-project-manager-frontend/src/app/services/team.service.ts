@@ -42,7 +42,7 @@ export class TeamService {
   }
 
   deleteMember(userId: number, teamId: number) {
-    this.http.delete(`${this.baseUrl}users/${userId}/teams/${teamId}`);
+    return this.http.delete(`${this.baseUrl}users/${userId}/teams/${teamId}`);
   }
 }
 
