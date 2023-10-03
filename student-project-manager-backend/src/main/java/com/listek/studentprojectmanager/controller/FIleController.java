@@ -1,5 +1,6 @@
 package com.listek.studentprojectmanager.controller;
 
+import com.listek.studentprojectmanager.dao.FileDBRepository;
 import com.listek.studentprojectmanager.dao.TeamRepository;
 import com.listek.studentprojectmanager.dto.ResponseFile;
 import com.listek.studentprojectmanager.dto.ResponseMessage;
@@ -26,6 +27,9 @@ public class FIleController {
 
     @Autowired
     private FileStorageService storageService;
+
+    @Autowired
+    private FileDBRepository fileRepository;
 
     @Autowired
     private TeamRepository teamRepository;
@@ -58,6 +62,7 @@ public class FIleController {
                     .toUriString();
 
             return new ResponseFile(
+                    dbFile.getId(),
                     dbFile.getName(),
                     fileDownloadUri,
                     dbFile.getType(),
@@ -73,5 +78,14 @@ public class FIleController {
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
                 .body(fileDB.getData());
+    }
+
+    @DeleteMapping("/files/{id}")
+    public ResponseEntity<HttpStatus> deleteFile(@PathVariable String id) {
+        FileDB fileDB = storageService.getFile(id);
+
+        fileRepository.delete(fileDB);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
