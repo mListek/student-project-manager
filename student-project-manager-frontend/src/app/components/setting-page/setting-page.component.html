@@ -52,8 +52,7 @@
       <h3 class="section-header">Grupa:</h3>
       <hr class="section-line">
       <div class="section__content">
-        <p class="content__text">Jesteś członkiem grupy: 2K331/BD</p>
-        <button class="delete-button" type="button">Opuść grupę</button>
+        <p class="content__text">Twoja grupa to: {{ currentTeam?.name }}</p>
       </div>
     </div>
     <div class="content__section">
@@ -61,7 +60,7 @@
       <hr class="section-line">
       <div class="section__content">
         <p class="content__text">Usuń swoje konto. Operacja nieodwracalna!</p>
-        <button class="delete-button" type="button">Usuń konto</button>
+        <button class="delete-button" type="button" (click)="deleteUser()">Usuń konto</button>
       </div>
     </div>
     <div class="border-line"></div>
