@@ -5,16 +5,17 @@
   <div class="main-content">
     <div class="group-header__container">
       <p class="group__text">Imię i nazwisko</p>
-      <div class="border__line--vertical"></div>
-      <p class="group__text">Usuń</p>
+      <div class="border__line--vertical" *ngIf="user.role === 'teacher'"></div>
+      <p class="group__text" *ngIf="user.role === 'teacher'">Usuń</p>
     </div>
     <div class="group-container" *ngFor="let member of teamMembers">
       <p class="group__text">{{ member.firstName + ' ' + member.lastName }}</p>
-      <div class="border__line--vertical"></div>
+      <div class="border__line--vertical" *ngIf="user.role === 'teacher'"></div>
       <button
         class="delete-button"
         type="button"
-        (click)="onMemberDelete(member.id)">Usuń z Grupy</button>
+        (click)="onMemberDelete(member.id)"
+        *ngIf="user.role === 'teacher'">Usuń z Grupy</button>
     </div>
   </div>
 </div>
