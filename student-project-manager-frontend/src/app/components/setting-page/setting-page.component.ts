@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/auth/auth.service';
+import { Team } from 'src/app/model/team.model';
 import { User } from 'src/app/model/user.model';
+import { TeamService } from 'src/app/services/team.service';
 
 @Component({
   selector: 'app-setting-page',
@@ -12,9 +14,10 @@ import { User } from 'src/app/model/user.model';
 export class SettingPageComponent implements OnInit {
   user: User;
   error: string = '';
+  currentTeam: Team;
 
   constructor(private authService: AuthService,
-              private http: HttpClient) {}
+              private teamService: TeamService) {}
   
   ngOnInit() {
     this.authService.user.subscribe(user => {
@@ -22,6 +25,14 @@ export class SettingPageComponent implements OnInit {
         this.user = user;
       }
     });
+    this.teamService.currentTeam.subscribe(
+      res => {
+        this.currentTeam = res;
+      },
+      err => {
+        console.log(err);
+      }
+    )
   }
 
   onSettingsChanged(form: NgForm) {
@@ -43,5 +54,9 @@ export class SettingPageComponent implements OnInit {
       }
     )
     form.reset();
+  }
+
+  deleteUser() {
+    this.authService.deleteUser(this.user.id).subscribe();
   }
 }

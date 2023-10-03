@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { User } from "../model/user.model";
 import { catchError, tap } from "rxjs/operators";
-import { BehaviorSubject, throwError } from "rxjs";
+import { BehaviorSubject, Observable, throwError } from "rxjs";
 import { Router } from "@angular/router";
 import { Team } from "../model/team.model";
 import { Task } from "../model/task.model";
@@ -11,6 +11,7 @@ import { UserRequest } from "../model/user-request.model";
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   user = new BehaviorSubject<User>(null);
+  deleteUserSub: Observable<Object>;
 
   constructor(private http: HttpClient,
               private router: Router) {}
@@ -105,6 +106,13 @@ export class AuthService {
         res.teams,
         res.tasks);
     }));
+  }
+
+  deleteUser(userId: number) {
+    this.deleteUserSub = this.http.delete(`http://localhost:8080/api/users/${userId}`);
+    this.logout();
+
+    return this.deleteUserSub;
   }
 
   private handleAuthentication(
