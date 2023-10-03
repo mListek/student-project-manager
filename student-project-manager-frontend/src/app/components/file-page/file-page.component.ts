@@ -67,4 +67,16 @@ export class FilePageComponent implements OnInit {
       this.selectedFiles = undefined;
     }
   }
+
+  deleteFile(fileId: number) {
+    this.fileService.deleteFile(fileId).subscribe(
+      res => {
+        console.log(res);
+        this.fileInfos = this.fileService.getFiles(this.currentTeam.id);
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
 }

@@ -21,4 +21,8 @@ export class FileService {
   getFiles(teamId: number) {
     return this.http.get(`${this.baseUrl}teams/${teamId}/files`);
   }
+
+  deleteFile(fileId: number) {
+    return this.http.delete(`${this.baseUrl}files/${fileId}`);
+  }
 }

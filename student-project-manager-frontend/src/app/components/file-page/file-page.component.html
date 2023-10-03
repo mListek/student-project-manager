@@ -9,7 +9,7 @@
           <img src="assets/icons/file.svg" alt="file-icon" class="file__icon" />
           <a href="{{ file.url }}" class="file__name">{{ file.name }} </a>
         </div>
-        <button class="delete-button" type="button">Usuń</button>
+        <button class="delete-button" type="button" (click)="deleteFile(file.id)">Usuń</button>
       </div>
     </div>
     <div class="border-line"></div>
