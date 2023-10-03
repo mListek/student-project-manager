@@ -6,6 +6,7 @@ import com.listek.studentprojectmanager.dao.UserRepository;
 import com.listek.studentprojectmanager.dto.TaskDto;
 import com.listek.studentprojectmanager.entity.Message;
 import com.listek.studentprojectmanager.entity.Task;
+import com.listek.studentprojectmanager.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -51,5 +52,27 @@ public class TaskController {
 
     @PutMapping ResponseEntity<Task> updateTask(@RequestBody Task task) {
         return new ResponseEntity<>(taskRepository.save(task), HttpStatus.OK);
+    }
+
+    @PostMapping("/tasks/{taskId}/users/{userId}")
+    public ResponseEntity<Task> addUserToTask(@PathVariable(name = "taskId") long taskId,
+                                              @PathVariable(name = "userId") long userId) {
+        Task task = taskRepository.findById(taskId);
+        User user = userRepository.findById(userId);
+
+        task.addUser(user);
+
+        return new ResponseEntity<>(taskRepository.save(task), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/tasks/{taskId}/users/{userId}")
+    public ResponseEntity<HttpStatus> deleteTaskUser(@PathVariable(name = "taskId") long taskId,
+                                            @PathVariable(name = "userId") long userId) {
+        Task task = taskRepository.findById(taskId);
+
+        task.removeUser(userId);
+        taskRepository.save(task);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
