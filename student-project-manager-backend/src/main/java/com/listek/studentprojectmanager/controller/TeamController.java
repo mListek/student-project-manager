@@ -38,6 +38,17 @@ public class TeamController {
         return new ResponseEntity<>(newTeam, HttpStatus.OK);
     }
 
+    @DeleteMapping("/teams/{teamId}")
+    public ResponseEntity<HttpStatus> deleteTeam(@PathVariable(name = "teamId") long teamId) {
+        Team team = teamRepository.findById(teamId);
+        for (User user : team.getUsers()) {
+            user.removeTeam(teamId);
+            userRepository.save(user);
+        }
+        teamRepository.delete(team);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
     @DeleteMapping("/users/{userId}/teams/{teamId}")
     public ResponseEntity<?> deleteTeamFromUser(
             @PathVariable(value = "userId") Long userId,
