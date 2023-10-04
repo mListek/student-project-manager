@@ -13,6 +13,7 @@ import { TeamService } from 'src/app/services/team.service';
 export class GroupPageComponent implements OnInit {
   user: User;
   teams: Team[] = [];
+  error: string = '';
 
   constructor(private authService: AuthService,
               private teamService: TeamService) {}
@@ -27,7 +28,30 @@ export class GroupPageComponent implements OnInit {
   }
 
   chooseCurrentTeam(team: Team) {
+    console.log("click! choosing current team");
     this.teamService.setCurrentTeam(team);
+  }
+
+  onDeleteTeam(teamId: number) {
+    if (this.teams.length <= 1) {
+      this.error = "Nie można usunąć ostatniej grupy!";
+      return;
+    }
+    for (let team of this.teams) {
+      if (team.id !== teamId) {
+        this.teamService.setCurrentTeam(team);
+        break;
+      }
+    }
+    this.teamService.deleteTeam(teamId).subscribe(
+      res => {
+        console.log(res);
+        this.getTeamsOfUser(this.user.id);
+      },
+      err => {
+        console.log(err);
+      }
+    )
   }
 
   onCreateGroup(form: NgForm) {

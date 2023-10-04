@@ -44,6 +44,10 @@ export class TeamService {
   deleteMember(userId: number, teamId: number) {
     return this.http.delete(`${this.baseUrl}users/${userId}/teams/${teamId}`);
   }
+
+  deleteTeam(teamId: number) {
+    return this.http.delete(`${this.baseUrl}teams/${teamId}`);
+  }
 }
 
 interface UsersResponse {

@@ -19,9 +19,10 @@
         <div class="border__line--vertical"></div>
         <p class="group__text">{{ team.code }}</p>
         <div class="border__line--vertical"></div>
-        <button class="delete-button" type="button">Usuń</button>
+        <button class="delete-button" type="button" (click)="$event.stopPropagation(); onDeleteTeam(team.id)">Usuń</button>
       </a>
     </div>
+    <p *ngIf="error">{{ error }}</p>
     <div class="border-line"></div>
     <form class="group-form" (ngSubmit)="onCreateGroup(f)" #f="ngForm">
       <label for="teamName" class="form-label">Nazwa:</label>
