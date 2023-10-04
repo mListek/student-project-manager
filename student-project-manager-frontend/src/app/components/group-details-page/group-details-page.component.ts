@@ -24,26 +24,38 @@ export class GroupDetailsPageComponent implements OnInit, OnDestroy {
     this.authService.user.subscribe(user => {
       if (user !== null) {
         this.user = user;
-        if (user.teams[0] !== undefined) {
-          this.currentTeam = user.teams[0];
-        }
+        this.teamService.currentTeam.subscribe(
+          res => {
+            this.currentTeam = res;
+            this.teamService.getMembersOfTeam(this.currentTeam.id).subscribe(res => {
+              this.teamMembers = res;
+              console.log(this.teamMembers);
+            },
+            err => {
+              console.log(err);
+            });
+          },
+          err => {
+            console.log(err);
+          }
+        )
         if (user.role === 'teacher') {
           this.isTeacher = true;
         }
       }
     });
-    this.teamService.getMembersOfTeam(this.currentTeam.id).pipe(take(1)).subscribe(res => {
-      this.teamMembers = res;
-      console.log(this.teamMembers);
-    },
-    err => {
-      console.log(err);
-    });
   }
 
   onMemberDelete(userId: number) {
-    console.log('deleting user from group');
-    this.teamService.deleteMember(userId, this.currentTeam.id);
+    console.log('deleting user from group, id: ' + userId);
+    this.teamService.deleteMember(userId, this.currentTeam.id).subscribe(
+      res => {
+        console.log(res);
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 
   ngOnDestroy() {
