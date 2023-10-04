@@ -44,6 +44,7 @@
     <a
       routerLink="/groups"
       routerLinkActive="navbar__link--active"
+      [routerLinkActiveOptions]="{exact: true}"
       class="navbar__link"
       *ngIf="isTeacher">
       <img src="assets\icons\list.svg" alt="icon" class="link__icon" />
