@@ -28,13 +28,7 @@ export class GroupDetailsPageComponent implements OnInit, OnDestroy {
           res => {
             this.currentTeam = res;
             if (this.currentTeam !== null) {
-              this.teamService.getMembersOfTeam(this.currentTeam.id).subscribe(res => {
-                this.teamMembers = res;
-                console.log(this.teamMembers);
-              },
-              err => {
-                console.log(err);
-              });
+              this.getMembersOfTeam();
             }
           },
           err => {
@@ -53,6 +47,7 @@ export class GroupDetailsPageComponent implements OnInit, OnDestroy {
     this.teamService.deleteMember(userId, this.currentTeam.id).subscribe(
       res => {
         console.log(res);
+        this.getMembersOfTeam();
       },
       err => {
         console.log(err);
@@ -62,5 +57,15 @@ export class GroupDetailsPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.isTeacher = false;
+  }
+
+  private getMembersOfTeam() {
+    this.teamService.getMembersOfTeam(this.currentTeam.id).subscribe(res => {
+      this.teamMembers = res;
+      console.log(this.teamMembers);
+    },
+    err => {
+      console.log(err);
+    });
   }
 }
