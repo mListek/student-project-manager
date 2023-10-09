@@ -19,7 +19,7 @@
         class="delete-button"
         type="button"
         (click)="onMemberDelete(member.id)"
-        *ngIf="user.role === 'teacher'">Usuń z Grupy</button>
+        *ngIf="user.role === 'teacher' && user.id !== member.id">Usuń z Grupy</button>
     </div>
   </div>
 </div>
