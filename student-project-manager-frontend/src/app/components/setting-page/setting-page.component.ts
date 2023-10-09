@@ -64,6 +64,19 @@ export class SettingPageComponent implements OnInit {
       },
       err => {
         console.log(err);
+        this.error = err.error;
+      }
+    )
+  }
+
+  onLeaveTeam() {
+    this.teamService.deleteMember(this.user.id, this.currentTeam.id).subscribe(
+      res => {
+        console.log(res);
+        this.teamService.setCurrentTeam(null);
+      },
+      err => {
+        console.log(err);
       }
     )
   }
