@@ -16,6 +16,11 @@ export class AuthService {
   constructor(private http: HttpClient,
               private router: Router) {}
 
+  setCurrentUser(user: User) {
+    this.user.next(user);
+    localStorage.setItem('userData', JSON.stringify(user));
+  }
+
   signup(userRequest: UserRequest) {
     return this.http.post<User>(
       'http://localhost:8080/api/register', 
