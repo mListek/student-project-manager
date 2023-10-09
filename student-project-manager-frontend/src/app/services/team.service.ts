@@ -28,11 +28,16 @@ export class TeamService {
     )
   }
 
+  addUserToTeam(userId: number, teamCode: string) {
+    return this.http.post<User>(
+      `${this.baseUrl}users/${userId}/teams`,
+      teamCode
+    )
+  }
+
   getTeamsOfUser(userId: number) {
-    return this.http.get<TeamsResponse>(
-      `${this.baseUrl}users/${userId}/teams`).pipe(
-        map(res => res._embedded.teams)
-    );
+    return this.http.get<Team[]>(
+      `${this.baseUrl}users/${userId}/teams`);
   }
 
   getMembersOfTeam(teamId: number) {
@@ -53,11 +58,5 @@ export class TeamService {
 interface UsersResponse {
   _embedded: {
     users: User[];
-  }
-}
-
-interface TeamsResponse {
-  _embedded: {
-    teams: Team[];
   }
 }
