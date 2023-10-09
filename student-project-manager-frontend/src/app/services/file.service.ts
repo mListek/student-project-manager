@@ -1,6 +1,5 @@
-import { HttpClient, HttpEvent, HttpRequest } from "@angular/common/http";
-import { Injectable, OnInit } from "@angular/core";
-import { Observable } from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 import { TeamService } from "./team.service";
 
 @Injectable({ providedIn: 'root' })

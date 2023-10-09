@@ -1,6 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { take } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Team } from 'src/app/model/team.model';
 import { User } from 'src/app/model/user.model';
@@ -43,10 +41,8 @@ export class GroupDetailsPageComponent implements OnInit, OnDestroy {
   }
 
   onMemberDelete(userId: number) {
-    console.log('deleting user from group, id: ' + userId);
     this.teamService.deleteMember(userId, this.currentTeam.id).subscribe(
       res => {
-        console.log(res);
         this.getMembersOfTeam();
       },
       err => {
@@ -62,7 +58,6 @@ export class GroupDetailsPageComponent implements OnInit, OnDestroy {
   private getMembersOfTeam() {
     this.teamService.getMembersOfTeam(this.currentTeam.id).subscribe(res => {
       this.teamMembers = res;
-      console.log(this.teamMembers);
     },
     err => {
       console.log(err);

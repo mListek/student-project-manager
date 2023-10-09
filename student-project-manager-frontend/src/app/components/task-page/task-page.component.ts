@@ -40,7 +40,6 @@ export class TaskPageComponent implements OnInit {
   onCreateTask(form: NgForm) {
     this.taskService.createTask(form.value.taskName, this.user.id, this.currentTeam.id).subscribe(
       res => {
-        console.log(res);
         this.getTeamTasks(this.currentTeam.id);
       },
       err => {

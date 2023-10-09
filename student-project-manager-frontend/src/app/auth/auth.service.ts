@@ -46,8 +46,6 @@ export class AuthService {
         password: password
       }
     ).pipe(catchError(this.handleError), tap(res => {
-      console.log('auth service res:')
-      console.log(res);
       this.handleAuthentication(
         +res.id,
         res.email,
@@ -99,8 +97,6 @@ export class AuthService {
     return this.http.put<User>(`http://localhost:8080/api/users/${user.id}`,
       user
     ).pipe(tap(res => {
-      console.log('auth service res:')
-      console.log(res);
       this.handleAuthentication(
         +res.id,
         res.email,
@@ -135,7 +131,6 @@ export class AuthService {
   }
 
   private handleError(errorRes: HttpErrorResponse) {
-    console.log(errorRes);
     let errorMessage = 'Wystąpił niespodziewany błąd!';
     if (!errorRes.error) {
       return throwError(() => errorRes);

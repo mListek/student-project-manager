@@ -51,8 +51,6 @@ export class RegisterPageComponent {
     
     this.authService.signup(userRequest).subscribe(
       resData => {
-        console.log('Register page component data...');
-        console.log(resData);
         this.router.navigate(['/tasks']);
       },
       error => {

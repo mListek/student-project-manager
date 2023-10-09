@@ -18,7 +18,6 @@ export class TeamService {
   }
 
   createTeam(teamName: string, userId: number) {
-    console.log('create team teamservice');
     return this.http.post(
       `${this.baseUrl}teams`,
       {

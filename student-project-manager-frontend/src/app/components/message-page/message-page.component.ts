@@ -42,7 +42,6 @@ export class MessagePageComponent implements OnInit {
       this.currentTeam.id
     ).subscribe(
       res => {
-        console.log(res);
         this.getTeamMessages(this.currentTeam.id);
       },
       err => {
@@ -56,7 +55,6 @@ export class MessagePageComponent implements OnInit {
     this.messageService.getTeamMessages(teamId).subscribe(
       res => {
         if (res !== null) {
-          console.log(res);
           this.messages = res;
         }
       },

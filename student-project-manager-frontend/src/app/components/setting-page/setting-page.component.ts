@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -42,12 +41,10 @@ export class SettingPageComponent implements OnInit {
       return;
     }
     if (form.value.password.length >= 6) {
-      console.log(form.value.password.length);
       this.user.password = form.value.password;
     }
     this.authService.updateUser(this.user).subscribe(
       res => {
-        console.log(res);
       },
       err => {
         console.log(err);
@@ -59,7 +56,6 @@ export class SettingPageComponent implements OnInit {
   onAddTeam(form: NgForm) {
     this.teamService.addUserToTeam(this.user.id, form.value.code).subscribe(
       res => {
-        console.log(res);
         this.authService.setCurrentUser(res);
       },
       err => {
@@ -72,7 +68,6 @@ export class SettingPageComponent implements OnInit {
   onLeaveTeam() {
     this.teamService.deleteMember(this.user.id, this.currentTeam.id).subscribe(
       res => {
-        console.log(res);
         this.teamService.setCurrentTeam(null);
       },
       err => {

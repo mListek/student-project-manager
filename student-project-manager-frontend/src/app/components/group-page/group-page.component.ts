@@ -28,7 +28,6 @@ export class GroupPageComponent implements OnInit {
   }
 
   chooseCurrentTeam(team: Team) {
-    console.log("click! choosing current team");
     this.teamService.setCurrentTeam(team);
   }
 
@@ -45,7 +44,6 @@ export class GroupPageComponent implements OnInit {
     }
     this.teamService.deleteTeam(teamId).subscribe(
       res => {
-        console.log(res);
         this.getTeamsOfUser(this.user.id);
       },
       err => {
@@ -56,10 +54,8 @@ export class GroupPageComponent implements OnInit {
 
   onCreateGroup(form: NgForm) {
     if (!form.valid) return;
-    console.log('clicked create group');
     this.teamService.createTeam(form.value.teamName, this.user.id).subscribe(
       res => {
-        console.log(res);
         this.getTeamsOfUser(this.user.id);
       },
       err => {

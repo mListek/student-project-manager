@@ -76,7 +76,6 @@ export class TaskDetailsPageComponent implements OnInit {
 
     this.taskService.updateTask(this.currentTask).subscribe(
       res => {
-        console.log(res);
       },
       err => {
         console.log(err);
@@ -94,7 +93,6 @@ export class TaskDetailsPageComponent implements OnInit {
     this.currentTask.status = btn.value;
     this.taskService.updateTask(this.currentTask).subscribe(
       res => {
-        console.log(res);
       },
       err => {
         console.log(err);
@@ -105,7 +103,6 @@ export class TaskDetailsPageComponent implements OnInit {
   onDeleteTask() {
     this.taskService.deleteTask(this.currentTask.id).subscribe(
       res => {
-        console.log(res);
         this.router.navigate(['/tasks']);
       },
       err => {
@@ -119,7 +116,6 @@ export class TaskDetailsPageComponent implements OnInit {
     if (+form.value.users === null || +form.value.users === undefined) { return; }
     this.taskService.addUserToTask(this.currentTask.id, +form.value.users).subscribe(
       res => {
-        console.log(res);
         this.getTaskUsers();
       },
       err => {
@@ -131,7 +127,6 @@ export class TaskDetailsPageComponent implements OnInit {
   deleteTaskUser(userId: number) {
     this.taskService.deleteTaskUser(this.currentTask.id, userId).subscribe(
       res => {
-        console.log(res);
         this.getTaskUsers();
         this.getMembersOfTeam();
       },

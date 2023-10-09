@@ -15,13 +15,10 @@ export class LoginPageComponent {
               private router: Router) {}
 
   onLogin(form: NgForm) {
-    console.log(form.value.email, form.value.password);
     if (!form.valid) return;
 
     this.authService.login(form.value.email, form.value.password).subscribe(
       resData => {
-        console.log('Login page component data...');
-        console.log(resData);
         this.router.navigate(['/tasks']);
       },
       error => {

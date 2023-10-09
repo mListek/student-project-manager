@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Team } from 'src/app/model/team.model';
@@ -46,12 +45,9 @@ export class FilePageComponent implements OnInit {
         this.currentFile = file;
         this.fileService.upload(this.currentFile, this.currentTeam.id).subscribe(
           res => {
-            console.log(res);
             this.fileInfos = this.fileService.getFiles(this.currentTeam.id);
-            console.log(this.fileInfos);
           },
           err => {
-            console.log(err);
             if (err.error && err.error.message) {
               this.message = err.error.message;
             } else {
@@ -70,7 +66,6 @@ export class FilePageComponent implements OnInit {
   deleteFile(fileId: number) {
     this.fileService.deleteFile(fileId).subscribe(
       res => {
-        console.log(res);
         this.fileInfos = this.fileService.getFiles(this.currentTeam.id);
       },
       err => {
