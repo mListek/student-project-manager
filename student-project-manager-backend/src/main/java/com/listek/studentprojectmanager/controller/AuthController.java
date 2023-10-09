@@ -78,17 +78,4 @@ public class AuthController {
 
         return ResponseEntity.ok().body(existingUser);
     }
-
-    @DeleteMapping("/users/{userId}")
-    public ResponseEntity<HttpStatus> deleteUser(@PathVariable(name = "userId") long userId) {
-
-        User user = userRepository.findById(userId);
-        user.setEmail(user.getEmail() + "deleted");
-        user.setPassword("user_deleted");
-        user.setLastName(user.getLastName() + " (konto usunięte)");
-
-        userRepository.save(user);
-
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
 }
