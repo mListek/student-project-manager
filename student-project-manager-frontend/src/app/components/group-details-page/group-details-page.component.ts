@@ -27,13 +27,15 @@ export class GroupDetailsPageComponent implements OnInit, OnDestroy {
         this.teamService.currentTeam.subscribe(
           res => {
             this.currentTeam = res;
-            this.teamService.getMembersOfTeam(this.currentTeam.id).subscribe(res => {
-              this.teamMembers = res;
-              console.log(this.teamMembers);
-            },
-            err => {
-              console.log(err);
-            });
+            if (this.currentTeam !== null) {
+              this.teamService.getMembersOfTeam(this.currentTeam.id).subscribe(res => {
+                this.teamMembers = res;
+                console.log(this.teamMembers);
+              },
+              err => {
+                console.log(err);
+              });
+            }
           },
           err => {
             console.log(err);

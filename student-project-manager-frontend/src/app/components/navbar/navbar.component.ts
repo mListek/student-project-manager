@@ -33,9 +33,7 @@ export class NavbarComponent implements OnInit {
     });
     this.teamService.currentTeam.subscribe(
       res => {
-        if (res !== null) {
-          this.currentTeam = res;
-        }
+        this.currentTeam = res;
       },
       err => {
         console.log(err);

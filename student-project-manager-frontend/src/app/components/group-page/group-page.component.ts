@@ -34,13 +34,13 @@ export class GroupPageComponent implements OnInit {
 
   onDeleteTeam(teamId: number) {
     if (this.teams.length <= 1) {
-      this.error = "Nie można usunąć ostatniej grupy!";
-      return;
-    }
-    for (let team of this.teams) {
-      if (team.id !== teamId) {
-        this.teamService.setCurrentTeam(team);
-        break;
+      this.teamService.setCurrentTeam(null);
+    } else {
+      for (let team of this.teams) {
+        if (team.id !== teamId) {
+          this.teamService.setCurrentTeam(team);
+          break;
+        }
       }
     }
     this.teamService.deleteTeam(teamId).subscribe(
@@ -51,7 +51,7 @@ export class GroupPageComponent implements OnInit {
       err => {
         console.log(err);
       }
-    )
+    );
   }
 
   onCreateGroup(form: NgForm) {
@@ -73,6 +73,8 @@ export class GroupPageComponent implements OnInit {
     this.teamService.getTeamsOfUser(userId).subscribe(
       res => {
         this.teams = res;
+        this.user.teams = this.teams;
+        localStorage.setItem('userData', JSON.stringify(this.user));
       },
       err => {
         console.log(err);

@@ -25,9 +25,8 @@ export class FilePageComponent implements OnInit {
   ngOnInit(): void {
     this.teamService.currentTeam.subscribe(
       res => {
+        this.currentTeam = res;
         if (res !== null) {
-          this.currentTeam = res;
-          console.log(res);
           this.fileInfos = this.fileService.getFiles(this.currentTeam.id);
         }
       }

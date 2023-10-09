@@ -28,8 +28,8 @@ export class MessagePageComponent implements OnInit {
       }
     });
     this.teamService.currentTeam.subscribe(currentTeam => {
+      this.currentTeam = currentTeam;
       if (currentTeam !== null) {
-        this.currentTeam = currentTeam;
         this.getTeamMessages(currentTeam.id);
       }
     });
