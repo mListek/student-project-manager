@@ -53,6 +53,7 @@
       <hr class="section-line">
       <div class="section__content" *ngIf="currentTeam">
         <p class="content__text">Twoja grupa to: {{ currentTeam?.name }}</p>
+        <button class="delete-button" type="button" (click)="onLeaveTeam()">Opuść grupę</button>
       </div>
       <form *ngIf="!currentTeam" #f="ngForm" (ngSubmit)="onAddTeam(f)">
         <label for="code" class="form-label">Kod grupy:</label>
