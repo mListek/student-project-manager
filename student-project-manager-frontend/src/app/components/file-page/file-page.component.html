@@ -2,7 +2,11 @@
   <div class="header">
     <h1 class="header-text">Pliki</h1>
   </div>
-  <div class="main-content">
+  <div class="main-content" *ngIf="!currentTeam">
+    <h3>Nie jesteś obecnie członkiem żadnej grupy!</h3>
+    <p>Dołącz do grupy i uzyskaj dostęp do wszystkich funkcji</p>
+  </div>
+  <div class="main-content" *ngIf="currentTeam">
     <div class="files__list">
       <div class="file-container" *ngFor="let file of fileInfos | async">
         <div class="file__info">

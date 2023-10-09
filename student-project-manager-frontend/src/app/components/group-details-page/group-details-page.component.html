@@ -1,4 +1,8 @@
-<div class="container">
+<div class="container" *ngIf="!currentTeam">
+  <h3>Nie jesteś obecnie członkiem żadnej grupy!</h3>
+  <p>Dołącz do grupy i uzyskaj dostęp do wszystkich funkcji</p>
+</div>
+<div class="container" *ngIf="currentTeam">
   <div class="header">
     <h1 class="header-text">{{ currentTeam.name }}</h1>
   </div>

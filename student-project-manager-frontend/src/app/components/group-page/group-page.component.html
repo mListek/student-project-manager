@@ -3,7 +3,11 @@
     <h1 class="header-text">Grupy</h1>
   </div>
   <div class="main-content">
-    <div class="groups__list">
+    <div class="groups__list" *ngIf="teams.length < 1">
+      <h3>Nie jesteś obecnie członkiem żadnej grupy!</h3>
+      <p>Dołącz do grupy i uzyskaj dostęp do wszystkich funkcji</p>
+    </div>
+    <div class="groups__list" *ngIf="teams.length >= 1">
       <div class="group-header__container">
         <p class="group__text">Nazwa</p>
         <div class="border__line--vertical"></div>

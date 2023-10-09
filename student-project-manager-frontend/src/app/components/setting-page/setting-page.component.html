@@ -48,12 +48,17 @@
           <p>{{ error }}</p>
         </div>
     </div>
-    <div class="content__section">
+    <div class="content__section" *ngIf="user.role === 'student'">
       <h3 class="section-header">Grupa:</h3>
       <hr class="section-line">
-      <div class="section__content">
+      <div class="section__content" *ngIf="currentTeam">
         <p class="content__text">Twoja grupa to: {{ currentTeam?.name }}</p>
       </div>
+      <form *ngIf="!currentTeam" #f="ngForm" (ngSubmit)="onAddTeam(f)">
+        <label for="code" class="form-label">Kod grupy:</label>
+        <input type="text" id="code" name="code" ngModel class="form-control" />
+        <button class="submit-button" type="submit">Dodaj Grupę</button>
+      </form>
     </div>
     <div class="content__section">
       <h3 class="section-header">Konto:</h3>
