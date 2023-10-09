@@ -56,7 +56,20 @@ export class SettingPageComponent implements OnInit {
     form.reset();
   }
 
+  onAddTeam(form: NgForm) {
+    this.teamService.addUserToTeam(this.user.id, form.value.code).subscribe(
+      res => {
+        console.log(res);
+        this.authService.setCurrentUser(res);
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
+
   deleteUser() {
     this.authService.deleteUser(this.user.id).subscribe();
+    this.authService.setCurrentUser(null);
   }
 }
