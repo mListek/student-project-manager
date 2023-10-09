@@ -1,8 +1,10 @@
 package com.listek.studentprojectmanager.controller;
 
+import com.listek.studentprojectmanager.dao.TaskRepository;
 import com.listek.studentprojectmanager.dao.TeamRepository;
 import com.listek.studentprojectmanager.dao.UserRepository;
 import com.listek.studentprojectmanager.dto.TeamRequest;
+import com.listek.studentprojectmanager.entity.Task;
 import com.listek.studentprojectmanager.entity.Team;
 import com.listek.studentprojectmanager.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ public class TeamController {
     @Autowired
     private TeamRepository teamRepository;
 
+    @Autowired
+    private TaskRepository taskRepository;
+
     @PostMapping("/teams")
     public ResponseEntity<?> createTeam(@RequestBody TeamRequest teamRequest) {
         System.out.println(teamRequest.getName() + teamRequest.getUserId());
@@ -41,11 +46,20 @@ public class TeamController {
     @DeleteMapping("/teams/{teamId}")
     public ResponseEntity<HttpStatus> deleteTeam(@PathVariable(name = "teamId") long teamId) {
         Team team = teamRepository.findById(teamId);
+        List<Task> tasks = taskRepository.findByTeamId(team.getId());
         for (User user : team.getUsers()) {
             user.removeTeam(teamId);
             userRepository.save(user);
+            for (Task task : tasks) {
+                if (task.getUsers().stream().anyMatch(u -> u.getEmail().equals(user.getEmail()))) {
+                    task.removeUser(user.getId());
+                    taskRepository.save(task);
+                }
+            }
         }
         teamRepository.delete(team);
+
+
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
@@ -56,11 +70,8 @@ public class TeamController {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("Not found User with id: " + userId));
 
-        if (user.getTeams().size() > 1) {
-            user.removeTeam(teamId);
-            userRepository.save(user);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return ResponseEntity.badRequest().body("LAST_GROUP");
+        user.removeTeam(teamId);
+        userRepository.save(user);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
