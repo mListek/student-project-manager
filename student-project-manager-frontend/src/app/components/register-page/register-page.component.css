@@ -1,12 +1,13 @@
 .header {
-  height: 194px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 50px;
 }
 
 .header-text {
   font-size: 70px;
+  text-align: center;
 }
 
 .main-content {
@@ -60,10 +61,14 @@
   width: 100%;
 }
 
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-left: 125px;
+}
+
 .form-checkbox {
-  margin-left: 225px;
   height: 30px;
-  width: 30px;
   min-width: 30px;
 }
 
@@ -104,4 +109,41 @@
 .redirect-link {
   color: #fff;
   margin: auto;
+}
+
+@media screen and (max-width: 1150px) {
+  .main-content {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 975px) {
+  .main-content {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 675px) {
+  .form-group {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .checkbox-container {
+    margin-left: 0;
+    margin-top: 25px
+  }
+}
+
+@media screen and (max-width: 526px) {
+  .header-text {
+    font-size: 35px;
+  }
+
+  .submit-button {
+    width: 55%;
+  }
+
+  .main-content {
+    padding: 25px 20px;
+  }
 }

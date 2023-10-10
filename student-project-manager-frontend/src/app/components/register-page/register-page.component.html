@@ -31,8 +31,10 @@
       <div class="form-group">
         <label for="code" class="form-label">Kod grupy:</label>
         <input type="text" id="code" name="code" ngModel class="form-control" />
-        <input type="checkbox" id="teacher" value=true name="teacher" ngModel class="form-checkbox" />
-        <label for="teacher" class="form-label">Konto wykładowcy</label>
+        <div class="checkbox-container">
+          <input type="checkbox" id="teacher" value=true name="teacher" ngModel class="form-checkbox" />
+          <label for="teacher" class="form-label">Konto wykładowcy</label>
+        </div>
       </div>
       <div class="form-error" *ngIf="error">
         <p>{{ error }}</p>
