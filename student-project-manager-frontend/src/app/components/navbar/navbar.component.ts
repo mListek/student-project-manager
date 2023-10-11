@@ -14,6 +14,7 @@ export class NavbarComponent implements OnInit {
   isLoggedIn = false;
   isTeacher = false;
   currentTeam: Team;
+  navbarOpen = false;
 
   constructor(private authService: AuthService,
               private teamService: TeamService) {}
@@ -41,7 +42,12 @@ export class NavbarComponent implements OnInit {
     )
   }
 
+  toggleNavbar() {
+    this.navbarOpen = !this.navbarOpen;
+  }
+
   onLogout() {
+    this.navbarOpen = false;
     this.isLoggedIn = false;
     this.isTeacher = false;
     this.currentTeam = null;

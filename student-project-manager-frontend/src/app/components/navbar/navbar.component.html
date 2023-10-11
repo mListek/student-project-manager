@@ -1,10 +1,9 @@
 <div class="navbar">
   <div class="navbar-left">
-    <a routerLink="/tasks"class="navbar__link">
+    <a routerLink="/tasks"class="navbar__logo">
       <img src="assets\icons\logo.svg" alt="logo" class="link__icon" />
       <p class="link__text--bold">Project MGR</p>
     </a>
-    <div class="border__line"  *ngIf="isLoggedIn"></div>
     <a
       routerLink="/tasks"
       routerLinkActive="navbar__link--active"
@@ -13,7 +12,6 @@
       <img src="assets\icons\task.svg" alt="icon" class="link__icon" />
       <p class="link__text">Zadania</p>
     </a>
-    <div class="border__line"  *ngIf="isLoggedIn"></div>
     <a
       routerLink="/messages"
       routerLinkActive="navbar__link--active"
@@ -22,7 +20,6 @@
       <img src="assets\icons\message.svg" alt="icon" class="link__icon" />
       <p class="link__text">Wiadomości</p>
     </a>
-    <div class="border__line"  *ngIf="isLoggedIn"></div>
     <a
       routerLink="/files"
       routerLinkActive="navbar__link--active"
@@ -31,7 +28,6 @@
       <img src="assets\icons\file.svg" alt="icon" class="link__icon" />
       <p class="link__text">Pliki</p>
     </a>
-    <div class="border__line"  *ngIf="isLoggedIn"></div>
     <a
       routerLink="/settings"
       routerLinkActive="navbar__link--active"
@@ -40,7 +36,6 @@
       <img src="assets\icons\settings.svg" alt="icon" class="link__icon" />
       <p class="link__text">Ustawienia</p>
     </a>
-    <div class="border__line" *ngIf="isTeacher"></div>
     <a
       routerLink="/groups"
       routerLinkActive="navbar__link--active"
@@ -62,7 +57,76 @@
       <p class="link__text">Grupa: {{ currentTeam.name }}</p>
       <img src="assets\icons\group.svg" alt="icon" class="link__icon" />
     </a>
-    <div class="border__line"  *ngIf="isLoggedIn"></div>
+    <a (click)="onLogout()" class="navbar__link"  *ngIf="isLoggedIn">
+      <p class="link__text">Wyloguj się</p>
+      <img src="assets\icons\logout.svg" alt="icon" class="link__icon" />
+    </a>
+  </div>
+</div>
+<div class="navbar__mobile">
+  <a routerLink="/tasks"class="navbar__logo">
+    <img src="assets\icons\logo.svg" alt="logo" class="link__icon" />
+    <p class="link__text--bold">Project MGR</p>
+  </a>
+  <img class="mobile__toggler" src="assets\icons\burger.svg"
+  (click)="toggleNavbar()" *ngIf="isLoggedIn" />
+  <div class="mobile__menu" [ngClass]="{'mobile__menu--open': navbarOpen}">
+    <a
+      routerLink="/tasks"
+      routerLinkActive="navbar__link--active"
+      class="navbar__link"
+      *ngIf="isLoggedIn"
+      (click)="toggleNavbar()">
+      <img src="assets\icons\task.svg" alt="icon" class="link__icon" />
+      <p class="link__text">Zadania</p>
+    </a>
+    <a
+      routerLink="/messages"
+      routerLinkActive="navbar__link--active"
+      class="navbar__link"
+      *ngIf="isLoggedIn"
+      (click)="toggleNavbar()">
+      <img src="assets\icons\message.svg" alt="icon" class="link__icon" />
+      <p class="link__text">Wiadomości</p>
+    </a>
+    <a
+      routerLink="/files"
+      routerLinkActive="navbar__link--active"
+      class="navbar__link"
+      *ngIf="isLoggedIn"
+      (click)="toggleNavbar()">
+      <img src="assets\icons\file.svg" alt="icon" class="link__icon" />
+      <p class="link__text">Pliki</p>
+    </a>
+    <a
+      routerLink="/settings"
+      routerLinkActive="navbar__link--active"
+      class="navbar__link"
+      *ngIf="isLoggedIn"
+      (click)="toggleNavbar()">
+      <img src="assets\icons\settings.svg" alt="icon" class="link__icon" />
+      <p class="link__text">Ustawienia</p>
+    </a>
+    <a
+      routerLink="/groups"
+      routerLinkActive="navbar__link--active"
+      [routerLinkActiveOptions]="{exact: true}"
+      class="navbar__link"
+      *ngIf="isTeacher"
+      (click)="toggleNavbar()">
+      <img src="assets\icons\list.svg" alt="icon" class="link__icon" />
+      <p class="link__text">Lista Grup</p>
+    </a>
+    <a
+      *ngIf="currentTeam"
+      [routerLink]="'/groups/' + currentTeam.id"
+      routerLinkActive="navbar__link--active"
+      [routerLinkActiveOptions]="{exact: true}"
+      class="navbar__link"
+      (click)="toggleNavbar()">
+      <p class="link__text">Grupa: {{ currentTeam.name }}</p>
+      <img src="assets\icons\group.svg" alt="icon" class="link__icon" />
+    </a>
     <a (click)="onLogout()" class="navbar__link"  *ngIf="isLoggedIn">
       <p class="link__text">Wyloguj się</p>
       <img src="assets\icons\logout.svg" alt="icon" class="link__icon" />
