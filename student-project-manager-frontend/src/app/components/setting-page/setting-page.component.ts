@@ -68,6 +68,8 @@ export class SettingPageComponent implements OnInit {
   onLeaveTeam() {
     this.teamService.deleteMember(this.user.id, this.currentTeam.id).subscribe(
       res => {
+        this.user.teams = this.user.teams.filter(team => team.id != this.currentTeam.id);
+        localStorage.setItem('userData', JSON.stringify(this.user));
         this.teamService.setCurrentTeam(null);
       },
       err => {
