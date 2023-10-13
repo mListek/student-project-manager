@@ -21,19 +21,20 @@
 }
 
 .header {
-  height: 194px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 50px;
 }
 
 .header-text {
-  font-size: 64px;
+  font-size: 70px;
+  text-align: center;
 }
 
 .main-content {
   width: 75%;
-  margin:auto;
+  margin: auto;
   background-color: #1e1f25;
   border-radius: 25px;
   padding: 25px;
@@ -42,7 +43,7 @@
 .messages__list {
   display: flex;
   flex-direction: column;
-  height: 500px;
+  height: 52vh;
   overflow-y: scroll;
 }
 
@@ -52,12 +53,10 @@
   margin: 5px 25px;
 }
 
-/* Temporary */
 .message-container--self {
   margin-left: auto;
 }
 
-/* Temporary */
 .message-container--self > .message__content {
   background-color: rgba(23, 98, 167, 50%);
 }
@@ -68,26 +67,13 @@
 }
 
 .message__content {
-  height: 75px;
+  min-height: 55px;
   background-color: rgba(25, 190, 51, 50%);
+  padding: 10px;
   border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.message__content::after {
-  content: '';
-  position: absolute;
-  left: -17px;
-  bottom: -14px;
-  width: 0;
-  height: 0;
-  border-top: 15px solid transparent;
-  border-bottom: 15px solid transparent;
-  /* border-left: 15px solid #1b4166; tip color blue */
-  /* border-left: 15px solid #1c6f2c; tip color green */
-  transform: rotate(45deg);
 }
 
 .border-line {
@@ -122,4 +108,47 @@
   color: #fff;
   background-color: #1762A7;
   border-radius: 10px;
+}
+
+@media screen and (max-width: 1150px) {
+  .message-container, .message-container--self {
+    width: 65%;
+  }
+  .message-form {
+    padding: 0;
+  }
+  
+  .form-control {
+    width: 100%;
+    margin: 0 25px;
+  }
+}
+
+@media screen and (max-width: 975px) {
+  .message-form {
+    flex-direction: column;
+  }
+
+  .form-control {
+    margin: 15px 25px;
+  }
+}
+
+@media screen and (max-width: 526px) {
+  .header-text {
+    font-size: 32px;
+  }
+
+  .main-content {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .messages__list {
+    height: 40vh;
+  }
+
+  .message-container, .message-container--self {
+    width: 85%;
+  }
 }

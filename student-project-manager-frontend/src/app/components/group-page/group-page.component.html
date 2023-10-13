@@ -10,9 +10,7 @@
     <div class="groups__list" *ngIf="teams.length >= 1">
       <div class="group-header__container">
         <p class="group__text">Nazwa</p>
-        <div class="border__line--vertical"></div>
         <p class="group__text">Kod dostępu</p>
-        <div class="border__line--vertical"></div>
         <p class="group__text">Usuń</p>
       </div>
       <a
@@ -20,9 +18,7 @@
         *ngFor="let team of teams"
         (click)="chooseCurrentTeam(team)">
         <p class="group__text">{{ team.name }}</p>
-        <div class="border__line--vertical"></div>
         <p class="group__text">{{ team.code }}</p>
-        <div class="border__line--vertical"></div>
         <button class="delete-button" type="button" (click)="$event.stopPropagation(); onDeleteTeam(team.id)">Usuń</button>
       </a>
     </div>

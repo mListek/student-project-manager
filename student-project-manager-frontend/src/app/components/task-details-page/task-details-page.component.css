@@ -1,12 +1,13 @@
 .header {
-  height: 194px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 50px;
 }
 
 .header-text {
-  font-size: 64px;
+  font-size: 70px;
+  text-align: center;
 }
 
 .main-content {
@@ -74,7 +75,7 @@
 
 .delete-button {
   height: 25px;
-  width: 159px;
+  width: 125px;
   font-weight: 700;
   color: #fff;
   background-color: rgba(255, 0, 0, 50%);
@@ -92,7 +93,7 @@
 
 .add-button {
   height: 25px;
-  width: 150px;
+  width: 125px;
   font-weight: 700;
   color: #fff;
   background-color: #1762A7;
@@ -102,12 +103,12 @@
 
 .category-button {
   height: 30px;
-  width: 150px;
+  width: 125px;
   font-weight: 700;
   color: #fff;
   background-color: #1762A7;
   border-radius: 10px;
-  margin-left: 20px;
+  margin: 5px 20px 0 0;
 }
 
 .category-button:disabled {
@@ -131,4 +132,48 @@
   color: #fff;
   background-color: #1762A7;
   border-radius: 10px;
+}
+
+@media screen and (max-width: 1150px) {
+  .content__upper {
+    flex-direction: column;
+  }
+  .content__line--vertical {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 526px) {
+  .main-content {
+    width: 90%;
+    padding: 15px;
+  }
+  .section__input {
+    flex-direction: column;
+  }
+  .section__text {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  .user__list {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .user__add {
+    display: flex;
+    flex-direction: column;
+  }
+  .user__select {
+    width: 100%;
+  }
+  .add-button {
+    width: 100%;
+    margin: 10px 0;
+  }
+  .section__content {
+    flex-direction: column;
+  }
+  .delete-button {
+    margin-left: 0;
+  }
 }

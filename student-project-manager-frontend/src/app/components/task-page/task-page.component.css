@@ -1,12 +1,13 @@
 .header {
-  height: 194px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 50px;
 }
 
 .header-text {
-  font-size: 64px;
+  font-size: 70px;
+  text-align: center;
 }
 
 .main-content {
@@ -53,11 +54,14 @@
 }
 
 .kanban__column {
+  width: 30%;
   margin: 0 25px;
 }
 
 .column__header {
-  font-size: 48px;
+  font-size: 40px;
+  text-align: center;
+  text-wrap: nowrap;
 }
 
 .column__line {
@@ -65,17 +69,78 @@
 }
 
 .column__task {
-  height: 70px;
+  min-height: 70px;
   background-color: #1762A7;
   border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 5px 10px;
   margin: 5px 0;
   color: #fff;
   text-decoration: none;
+  overflow: hidden;
 }
 
 .kanban__line {
   border-left: 1px solid #1762a7;
+}
+
+@media screen and (max-width: 1150px) {
+  .main-content {
+    width: 90%;
+  }
+
+  .column__header {
+    font-size: 28px;
+  }
+}
+
+@media screen and (max-width: 975px) {
+  .task-form {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .form-control {
+    width: 100%;
+    margin: 25px 0;
+  }
+
+  .main-content {
+    width: 50%;
+  }
+
+  .kanban {
+    flex-direction: column;
+  }
+
+  .kanban__column {
+    width: 100%;
+    margin: 0;
+  }
+
+  .column__header {
+    margin-top: 25px;
+  }
+
+  .kanban__line {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 675px) {
+  .main-content {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 526px) {
+  .header-text {
+    font-size: 32px;
+  }
+  
+  .kanban {
+    padding: 25px 5px;
+  }
 }

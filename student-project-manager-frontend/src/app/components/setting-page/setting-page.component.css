@@ -1,12 +1,13 @@
 .header {
-  height: 194px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 50px;
 }
 
 .header-text {
-  font-size: 64px;
+  font-size: 70px;
+  text-align: center;
 }
 
 .main-content {
@@ -59,15 +60,19 @@
 
 .delete-button {
   height: 25px;
-  width: 159px;
+  width: 125px;
   font-weight: 700;
   color: #fff;
   background-color: rgba(255, 0, 0, 50%);
   border-radius: 10px;
-  margin-left: 20px;
 }
 
 .section__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.group__form {
   display: flex;
 }
 
@@ -96,4 +101,30 @@
   color: #fff;
   background-color: #1762A7;
   border-radius: 10px;
+}
+
+@media screen and (max-width: 975px) {
+  .form-group {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .form-control {
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 526px) {
+  .header-text {
+    font-size: 32px;
+  }
+  .main-content {
+    width: 90%;
+    padding: 15px;
+  }
+  .group__form {
+    flex-direction: column;
+  }
+  .form-control, .submit-button {
+    width: 100%;
+  }
 }

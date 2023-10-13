@@ -55,7 +55,7 @@
         <p class="content__text">Twoja grupa to: {{ currentTeam?.name }}</p>
         <button class="delete-button" type="button" (click)="onLeaveTeam()">Opuść grupę</button>
       </div>
-      <form *ngIf="!currentTeam" #f="ngForm" (ngSubmit)="onAddTeam(f)">
+      <form *ngIf="!currentTeam" #f="ngForm" (ngSubmit)="onAddTeam(f)" class="group__form">
         <label for="code" class="form-label">Kod grupy:</label>
         <input type="text" id="code" name="code" ngModel class="form-control" />
         <button class="submit-button" type="submit">Dodaj Grupę</button>
